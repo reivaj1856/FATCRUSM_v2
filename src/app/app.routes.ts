@@ -9,7 +9,7 @@ export const routes: Routes = [
         loadChildren: () => import('./auth/features/auth.routes'),
     },
     { 
-        path: 'content',
+        path: 'public',
         loadChildren: () => import('./component/public/public.routes'),
     },
     { 
@@ -19,7 +19,7 @@ export const routes: Routes = [
     },
     { 
         path: '**',
-        loadChildren: () => import('./component/public/public.routes'),
+        loadChildren: () => import('./auth/features/auth.routes'),
     }, 
 ];
 

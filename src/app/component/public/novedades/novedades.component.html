@@ -1,0 +1,61 @@
+<app-header></app-header>
+          
+    <!-- Carrusel de novedades -->
+    <div class="w-full max-w-7xl mx-auto my-10">
+        <h2 class="text-slate-900 text-3xl lg:text-4xl font-bold  mb-4 py-5 leading-relaxed">Ultimas novedades</h2>
+  <div class="relative">
+    <div class="overflow-hidden rounded-lg shadow-lg">
+      <div class="carousel-slide flex transition-transform duration-700">
+        <img *ngFor="let img of imagenes; let i = index"
+             [src]="img"
+             class="w-full h-80 object-cover"
+             [class.hidden]="i !== indiceCarrusel"
+             [alt]="'Novedad ' + (i+1)" />
+      </div>
+    </div>
+    <button (click)="moverCarrusel(-1)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition">‹</button>
+    <button (click)="moverCarrusel(1)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition">›</button>
+  </div>
+</div>
+    
+    <script>
+      let indiceCarrusel = 0;
+      const slides = document.querySelectorAll('.carousel-slide img');
+      function mostrarSlide(n) {
+        slides.forEach((img, i) => {
+          img.classList.toggle('hidden', i !== n);
+        });
+      }
+      function moverCarrusel(dir) {
+        indiceCarrusel = (indiceCarrusel + dir + slides.length) % slides.length;
+        mostrarSlide(indiceCarrusel);
+      }
+      window.addEventListener('DOMContentLoaded', () => mostrarSlide(0));
+    </script>
+    
+    <div class="p-8 w-full rounded-lg max-w-7xl mx-auto">
+  <h1 class="text-4xl text-slate-900 font-bold">Novedades de Temporada</h1>
+  <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+    ¡Descubre lo último en moda con nuestra nueva colección! Esta temporada llega cargada de estilo, color y comodidad, pensada para destacar tu personalidad en cada ocasión. 
+    Encuentra prendas únicas, tejidos frescos y diseños modernos que marcan tendencia. 
+    Renueva tu armario con las piezas más buscadas y sé el primero en lucir lo nuevo. 
+    ¡Explora ahora y encuentra tu próximo outfit favorito!
+  </p>
+</div>
+
+
+    <div class="grid md:grid-cols-2 items-center gap-8 max-w-5xl max-md:max-w-md mx-auto py-5">
+      <div class="max-md:order-1 max-md:text-center">
+        <h2 class="md:text-4xl text-3xl md:leading-10 font-bold text-slate-900 mb-4">Suscribete!</h2>
+        <p class="mt-4 text-base text-slate-600 leading-relaxed">Suscribete para recibir notificaciones con nuestras nuevas promociones </p>
+        <div class="mt-12 flex flex-wrap max-md:justify-center gap-4">
+          <a href="javascript:void(0);" class="px-6 py-3 text-base font-semibold text-white bg-[#3a3a3a] rounded-full hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:outline-none focus:ring-opacity-50">Enviame notificaciones</a>
+          
+        </div>
+      </div>
+      <div class="md:h-[450px]">
+        <img src="https://cdn.media.amplience.net/i/primark/991142884108_03?$articleimages-regulardesktop$&fmt=auto" class="w-full h-full object-cover rounded-lg shadow-xl" alt="hero-img" />
+      </div>
+      
+    </div>
+<app-footer></app-footer>

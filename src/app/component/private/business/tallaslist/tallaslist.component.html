@@ -1,0 +1,85 @@
+<div class="p-6 bg-gradient-to-br from-gray-800 to-gray-950  rounded-xl shadow-sm">
+    <h2 class="text-2xl font-semibold mb-4 text-white">Lista de Tallas</h2>
+
+    <!-- Tabla de tallas -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full table-auto text-white">
+            <thead class="">
+                <tr>
+                    <th class="px-4 py-2 text-left">Tall</th>
+                    <th class="px-4 py-2 text-left">sexo</th>
+                    <th class="px-4 py-2 text-left">Descripción</th>
+                    <th class="px-4 py-2 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of listaTallas; let i = index" class="border-b hover:bg-gray-900">
+                    <td class="px-4 py-3">{{ t.talla}}</td>
+                    <td class="px-4 py-3 font-medium">{{ t.sexo }}</td>
+                    <td class="px-4 py-3 text-sm text-white">{{ t.tipo || '-' }}</td>
+                    <td class="px-4 py-3">
+                        <div class="flex items-center gap-2">
+                            <button (click)="openEditModal(t)"
+                                class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-white text-sm">
+                                Editar
+                            </button>
+
+                            <button (click)="confirmDelete(t)"
+                                class="px-3 py-1 bg-gray-800 text-white rounded hover:bg-white text-sm">
+                                Eliminar
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="listaTallas?.length === 0">
+                    <td colspan="5" class="px-4 py-6 text-center text-white">No hay tallas registradas.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botón nuevo -->
+    <div class="mt-4 flex justify-end ">
+        <button (click)="openEditModal(null)"
+            class="px-4 py-2 bg-gradient-to-br from-gray-600 to-gray-800 text-white rounded hover:bg-white">
+            + Nueva talla
+        </button>
+    </div>
+</div>
+
+<!-- Modal (editar / crear) -->
+<div *ngIf="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="bg-gradient-to-br from-gray-700 to-gray-950 w-full max-w-lg rounded-lg shadow-lg p-6">
+        <div class="flex items-center justify-between">
+            <h3 class="text-xl font-semibold text-white">{{ tallaSelect?.id_talla ? 'Editar Talla' : 'Nueva Talla' }}
+            </h3>
+            <button (click)="closeModal()" class="text-white hover:text-white">✕</button>
+        </div>
+
+        <form (ngSubmit)="saveTalla(talla.value, sexo.value, categoria.value)" class="mt-4 space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-white">Talla</label>
+                <input type="text" name="talla" class="mt-1 w-full rounded border-gray-300 p-2 bg-white" #talla required value="{{tallaSelect?.talla}}"/>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-white">Sexo</label>
+                <textarea name="sexo" class="mt-1 w-full rounded border-gray-300 p-2 bg-white" #sexo value="{{tallaSelect?.sexo}}"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-white">Categoria</label>
+                <textarea name="categoria" class="mt-1 w-full rounded border-gray-300 p-2 bg-white" #categoria value="{{tallaSelect?.tipo}}"></textarea>
+            </div>
+
+            <div class="mt-4 flex justify-end gap-2">
+                <button type="button" (click)="closeModal()" class="px-4 py-2 bg-gray-200 rounded">Cancelar</button>
+                <button type="submit" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal confirmación eliminar -->

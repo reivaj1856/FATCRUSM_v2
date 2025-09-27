@@ -12,7 +12,7 @@ import { AuthStateService } from '../../../data-access/auth-state.service';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [ReactiveFormsModule,HeadComponent,FooterComponent,RouterLink,GoogleComponent],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
@@ -45,12 +45,12 @@ export default class SignInComponent {
         password: this.form.value.password ?? '',
       });
       if(authResponse.error){
-        toast.info('Verifica tu correo para continuar');
+        toast.info('Error al iniciar sesión verifique sus credenciales');
         throw authResponse.error;
         
       }else{
-        toast.success('Bienvenido a JyT Films');
-        this._router.navigateByUrl('/content/media');
+        toast.success('Bienvenido a FATCRSM');
+        this._router.navigateByUrl('/private');
       }
       } catch (error) {
         console.error(error);

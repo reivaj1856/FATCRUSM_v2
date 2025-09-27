@@ -1,0 +1,86 @@
+<div class="mt-12 w-full">
+  <div class="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
+    <div class="relative flex flex-col rounded-xl bg-gradient-to-br from-gray-800 to-gray-950 shadow-md overflow-hidden xl:col-span-4">
+      
+      <!-- Header -->
+      <div class="flex items-center justify-between p-6">
+        <h6 class="text-white text-base font-semibold">Lista de inventario (materiales)</h6>
+        <button (click)="abrirModal()" class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600">
+          Añadir material
+        </button>
+      </div>
+
+      <!-- Tabla -->
+      <div class="p-6 overflow-x-auto">
+        <table class="w-full min-w-[640px] table-auto">
+          <thead>
+            <tr>
+              <th class="border-b border-white py-3 px-6 text-left">
+                <p class="text-[11px] uppercase text-white">Descripcion</p>
+              </th>
+              <th class="border-b border-white py-3 px-6 text-left">
+                <p class="text-[11px] uppercase text-white">Cantidad</p>
+              </th>
+              <th class="border-b border-white py-3 px-6 text-left">
+                <p class="text-[11px] uppercase text-white">Metraje</p>
+              </th>
+              <th class="border-b border-white py-3 px-6 text-left">
+                <p class="text-[11px] uppercase text-white">Costo</p>
+              </th>
+              <th class="border-b border-white py-3 px-6 text-left">
+                <p class="text-[11px] uppercase text-white">Acciones</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="inventario.length < 1">
+              <td colspan="5" class="py-3 px-5 text-white text-center">No hay materiales registrados</td>
+            </tr>
+            <tr *ngFor="let item of inventario">
+              <td class="py-3 px-5 border-b border-white text-white">{{ item.descripcion }}</td>
+              <td class="py-3 px-5 border-b border-white text-white">{{ item.cantidad }}</td>
+              <td class="py-3 px-5 border-b border-white text-white">{{ item.metraje }}</td>
+              <td class="py-3 px-5 border-b border-white text-white">{{ item.costo }}</td>
+              <td class="py-3 px-5 border-b border-white text-white flex gap-2">
+                <button (click)="editarMaterial(item)" class="text-white">Editar</button>
+                <button (click)="eliminarMaterial(item.id_inventario)" class="text-white">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center  bg-opacity-50 z-50">
+    <div class="bg-gradient-to-br from-gray-800 to-gray-950 p-6 rounded-lg w-full max-w-lg">
+      <div class="flex justify-between items-center border-b border-gray-600 pb-3">
+        <h3 class="text-white text-xl font-semibold">{{ editMode ? 'Editar Material' : 'Añadir Material' }}</h3>
+        <button (click)="cerrarModal()" class="text-gray-400 hover:text-gray-500">✖</button>
+      </div>
+      <form (ngSubmit)="guardarMaterial()" class="mt-4 space-y-3">
+        <div>
+          <label class="text-white text-sm">Descripción</label>
+          <input [(ngModel)]="material.descripcion" name="descripcion" class="w-full border rounded px-3 py-2 border-gray-400 text-white bg-gray-700"/>
+        </div>
+        <div>
+          <label class="text-white text-sm">Cantidad</label>
+          <input type="number" [(ngModel)]="material.cantidad" name="cantidad" class="w-full border rounded px-3 py-2 border-gray-400 text-white bg-gray-700"/>
+        </div>
+        <div>
+          <label class="text-white text-sm">Metraje</label>
+          <input type="number" step="0.01" [(ngModel)]="material.metraje" name="metraje" class="w-full border rounded px-3 py-2 border-gray-400 text-white bg-gray-700"/>
+        </div>
+        <div>
+          <label class="text-white text-sm">Costo</label>
+          <input type="number" step="0.01" [(ngModel)]="material.costo" name="costo" class="w-full border rounded px-3 py-2 border-gray-400 text-white bg-gray-700"/>
+        </div>
+        <div class="flex justify-end gap-2 pt-3">
+          <button type="button" (click)="cerrarModal()" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

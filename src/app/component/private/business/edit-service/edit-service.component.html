@@ -1,0 +1,123 @@
+<div class="p-6 bg-gradient-to-br from-gray-800 to-gray-950 text-white rounded-xl shadow-md space-y-6">
+  <h2 class="text-xl font-bold mb-4">Edit de Costura</h2>
+
+  <!-- === Fila 1 === -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Cliente -->
+    <div>
+      <label class="block text-sm font-medium mb-2">Cliente</label>
+      <ng-container *ngIf="listaClientes && listaClientes.length > 0; else noClientes">
+        <select [(ngModel)]="formData.clienteId" name="cliente"
+          class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500">
+          <option *ngFor="let cliente of listaClientes" [value]="cliente.id" selected>
+            {{ cliente.nombre }}
+          </option>
+        </select>
+      </ng-container>
+      <ng-template #noClientes>
+        <div class="py-2 w-full bg-gray-800 rounded-md border-0 text-center">
+          <a href="private/profile" type="button" class="py-2 bg-gray-800 rounded-md hover:bg-gray-700 font-bold w-max">
+            Registrar nuevo cliente
+          </a>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Costo -->
+    <div>
+      <label class="block text-sm font-medium mb-2">Costo</label>
+      <input type="number" [(ngModel)]="formData.costo" name="costo" value="{{ formData.costo }}"
+        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500" />
+    </div>
+
+    <!-- Cantidad -->
+    <div *ngIf="servicio!='costura'&& servicio!='sublimacion' && servicio!='vinilado'">
+      <label class="block text-sm font-medium mb-2">Cantidad</label>
+      <input type="number" [(ngModel)]="formData.cantidad" name="cantidad"
+        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500" />
+    </div>
+
+    <div *ngIf="servicio!='costura'">
+      <label class="block text-sm font-medium mb-2">Unidad</label>
+      <input type="text" [(ngModel)]="formData.cantidad" name="unidad" placeholder="ej. metros / poleras"
+        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500" />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-2">Descripcion</label>
+      <input type="text" [(ngModel)]="formData.descripcion" name="descripcion" placeholder="descripcion"
+        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500" />
+    </div>
+    <div *ngIf="servicio!='costura'&& servicio!='sublimacion' && servicio!='vinilado'">
+      <label class="block text-sm font-medium mb-2">Agregar Tallas</label>
+      <div class="flex space-x-2">
+        <ng-container *ngIf="listaTallas && listaTallas.length > 0; else noTallas">
+          <select [(ngModel)]="selectedTalla" name="talla"
+            class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500">
+            <option *ngFor="let talla of listaTallas" [ngValue]="talla.id">
+              {{ talla.talla }}: {{ talla.sexo }}: {{talla.tipo}}
+            </option>
+          </select>
+
+          <button type="button" class="p-2 bg-gray-400 text-black border-2 rounded-lg" (click)="agregarTalla()">
+            +
+          </button>
+        </ng-container>
+        <ng-template #noTallas>
+          <div class="py-2 w-full bg-gray-800 rounded-md border-0 text-center">
+            <a href="private/tallas" type="button"
+              class="py-2 bg-gray-800 rounded-md hover:bg-gray-700 font-bold w-max">
+              Registrar nuevas tallas
+            </a>
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- === Fila 2 === -->
+
+
+  <div class="p-1" *ngIf="servicio!='costura' && servicio!='sublimacion'">
+    <h2 class="text-xl font-bold mb-4">Lista de Tallas del pedido</h2>
+
+    <!-- Grid de 2 columnas -->
+    <div class="grid xl:grid-cols-4 md-grid-cols-1 gap-2">
+      <div *ngFor="let item of tallasServicios; let i = index" class="border p-4 rounded shadow-md border-gray-800">
+        <div class="grid grid-cols-2 gap-2">
+
+          <!-- Título ocupa toda la fila -->
+          <div class="col-span-2">
+            <h2 class="text-xl font-bold text-center text-white">{{item.nombre}}</h2>
+          </div>
+
+          <!-- Cantidad -->
+          <div>
+            <label class="block text-sm font-medium mb-1">Cantidad</label>
+            <input type="number" [(ngModel)]="item.cantidad" (ngModelChange)="generarCosto()"
+              class="border rounded p-0.5 w-full" />
+          </div>
+
+          <!-- Costo Unitario -->
+          <div>
+            <label class="block text-sm font-medium mb-1">Costo Unitario</label>
+            <input type="number" [(ngModel)]="item.costo" (ngModelChange)="generarCosto()"
+              class="border rounded p-0.5 w-full" />
+          </div>
+        </div>
+
+        <!-- Botón Eliminar -->
+        <button (click)="eliminarTalla(i)"
+          class="mt-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-red-600 w-full">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center justify-center ">
+    <a href="/private/costura/pedidos" class="bg-gray-700 rounded-lg py-2 px-10 w-full ml-2 text-center">Cancelar</a>
+
+    <button (click)="actualizarServicio()" class="bg-gray-700 rounded-lg py-2 px-10 w-full ml-2 text-center">Aplicar</button>
+
+  </div>
+</div>

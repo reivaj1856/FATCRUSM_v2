@@ -1,56 +1,86 @@
-<app-head></app-head>
-<div class="flex flex-col items-center justify-center py-25 px-4 bg-cover bg-center bg-[url('assets/img.png')]">
-  <div class="grid md:grid-cols-2 items-center gap-10 max-w-6xl max-md:max-w-md w-full">
-    <div>
-      <h2 class="lg:text-5xl text-3xl font-bold lg:leading-[57px] text-slate-900">
-        Ingreso sin complicaciones para acceso exclusivo
-      </h2>
-      <p class="text-sm mt-6 text-slate-500 leading-relaxed">Sumérgete en un proceso de inicio de sesión sin problemas con nuestro formulario intuitivo. Accede fácilmente a tu cuenta en Migueplex.</p>
-      <p class="text-sm mt-12 text-slate-500">¿No tienes una cuenta? <a routerLink="/auth/register" class="text-blue-600 font-medium hover:underline ml-1">Regístrate aquí</a></p>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<div
+  class="bg-purple-900 absolute top-0 left-0 bg-gradient-to-b from-gray-900 via-gray-900 to-purple-800 bottom-0 leading-5 h-full w-full overflow-hidden">
+
+</div>
+<div class="relative   min-h-screen  sm:flex sm:flex-row  justify-center bg-transparent rounded-3xl shadow-xl">
+  <div class="flex-col flex  self-center lg:px-14 sm:max-w-4xl xl:max-w-md  z-10">
+    <div class="self-start hidden lg:flex flex-col  text-gray-300">
+
+      <h1 class="my-3 font-semibold text-4xl">Bienvenido de nuevo</h1>
+      <p class="pr-3 text-sm opacity-75">Ayudamos en buscar tu maximo rendimiento registra tu inventario y mejora tus servicios con nosotros.</p>
     </div>
+  </div>
+  <div class="flex justify-center self-center  z-10">
+    <div class="p-12 bg-white mx-auto rounded-3xl w-96 ">
+      <div class="mb-7">
+        <h3 class="font-semibold text-2xl text-gray-800">Iniciar sesión</h3>
+        <p class="text-gray-400">¿No tienes una cuenta? <a routerLink="/auth/register"
+            class="text-sm text-purple-700 hover:text-purple-700">Regístrate</a></p>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="space-y-6">
+        <div class="">
+          <input
+            class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+            type="email" placeholder="Correo electrónico"
+            name="email" required autofocus formControlName="email" />
+            @if(isRequired('email')){
+                <small class="text-blue-400">Este campo es requerido</small>
+              }
+              @if(hasEmailRequired()){
+                <small class="text-blue-400">El correo debe ser valido</small>
+              }
+        </div>
 
-    <form class="max-w-md md:ml-auto w-full bg-slate-900 border-b-black bg-opacity-75 p-8 rounded-lg shadow-lg" [formGroup]="form" (ngSubmit)="submit()">
-      <h3 class="text-white lg:text-3xl text-2xl font-bold mb-8">
-        Iniciar sesión
-      </h3>
-      <div class="space-y-6">
-        <div>
-          <label class='text-sm text-white font-medium mb-2 block'>Correo electrónico</label>
-          <input name="email" type="email" required class="bg-slate-100 w-full text-sm text-slate-800 px-4 py-3 rounded-md outline-none border focus:border-blue-600 focus:bg-white" placeholder="Introduce tu correo electrónico" 
-          formControlName = 'email'/>
-          @if(isRequired('email')){
-            <small class="text-blue-400">Este campo es requerido</small>
-          }
-          @if(hasEmailRequired()){
-            <small class="text-blue-400">El correo debe ser valido</small>
-          } 
+
+        <div class="relative">
+            <input
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+              type="password" placeholder="Contraseña" name="password" required autofocus formControlName="password" />
+              @if(isRequired('password')){
+                <small class="text-blue-400">Este campo es requerido</small>
+              }  
+          </div>
+
+
+        <div class="flex items-center justify-between">
+
+          <div class="text-sm ml-auto">
+            <a routerLink="/auth/forgot-password" class="text-purple-700 hover:text-purple-600">
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
         </div>
         <div>
-          <label class='text-sm text-white font-medium mb-2 block'>Contraseña</label>
-          <input name="password" type="password" required class="bg-slate-100 w-full text-sm text-slate-800 px-4 py-3 rounded-md outline-none border focus:border-blue-600 focus:bg-white" placeholder="Introduce tu contraseña" 
-          formControlName = 'password'/>
-          @if(isRequired('password')){
-            <small class="text-blue-400">Este campo es requerido</small>
-          }
+          <button type="submit"
+            class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+            Iniciar sesión
+          </button>
         </div>
       </div>
-
-      <div class="!mt-12">
-        <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
-          Iniciar sesión
-        </button>
-      </div>
-
-      <div class="my-4 flex items-center gap-4">
-        <hr class="w-full border-slate-300" />
-        <p class="text-sm text-white text-center">o</p>
-        <hr class="w-full border-slate-300" />
-      </div>
-
-      <div class="space-x-6 flex submity-center items-center justify-center">
-        <app-google (onClic)="submitWithGoogle()"></app-google>
-      </div>
-    </form>
+      </form>
+    
+    </div>
   </div>
 </div>
-<app-footer></app-footer>
+
+<footer class="bg-transparent absolute w-full bottom-0 left-0 z-30">
+  <div class="container p-3 mx-auto  flex items-center justify-between ">
+    <div class="flex mr-auto">
+      <a href="https://codepen.io/uidesignhub" target="_blank" title="codepen aji"
+        class="text-center text-gray-700 focus:outline-none"><img
+          src="assets/Recurso2.png" alt="logo"
+          class="w-35 h-30">
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+<svg class="absolute bottom-0 left-0 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+  <path fill="#101519" fill-opacity="1"
+    d="M0,0L40,42.7C80,85,160,171,240,197.3C320,224,400,192,480,154.7C560,117,640,75,720,74.7C800,75,880,117,960,154.7C1040,192,1120,224,1200,213.3C1280,203,1360,149,1400,122.7L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z">
+  </path>
+</svg>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>

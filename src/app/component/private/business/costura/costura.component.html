@@ -1,0 +1,22 @@
+<div class="mb-6 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+  <div class="flex flex-row justify-between items-center col-span-2 md:col-span-2 xl:col-span-4">
+    <h2 class="text-xl font-semibold">Costura</h2>
+    </div>
+  <a routerLink="pedidos"
+    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950  text-gray-700 shadow-md">
+    <h2 class="p-4 text-white text-center">Historial pedidos</h2>
+  </a>
+  <a routerLink="material"
+    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950  text-gray-700 shadow-md">
+    <h2 class="p-4 text-white text-center">Inventario material</h2>
+  </a>
+  <a routerLink="tallas"
+    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950  text-gray-700 shadow-md">
+    <h2 class="p-4 text-white text-center">Definir medidas</h2>
+  </a>
+  <a routerLink="estimado"
+    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950  text-gray-700 shadow-md">
+    <h2 class="p-4 text-white text-center">Generar estimado</h2>
+  </a>
+</div>
+<router-outlet></router-outlet>
