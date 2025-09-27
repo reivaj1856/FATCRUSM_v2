@@ -5,7 +5,7 @@ import authRoutes from '../../auth/features/auth.routes';
 import { NotesService } from '../../data/data-access/data-access.service';
 import { AuthStateService } from '../../data-access/auth-state.service';
 
-
+import {  Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-head',
@@ -22,6 +22,7 @@ export class HeadComponent implements OnInit{
 
   ngOnInit(): void {
     this.verLogueado();
+
   }
 
   async logOut(){
@@ -36,4 +37,6 @@ export class HeadComponent implements OnInit{
     this.logueado =await this._supabaseClient.getLogin()
   }
   
+
+  @Output() toggleMenu = new EventEmitter<void>();
 }

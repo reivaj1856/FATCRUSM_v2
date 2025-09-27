@@ -9,4 +9,6 @@ import {  NgxSonnerToaster } from 'ngx-sonner';
 })
 export class AppComponent {
   title = 'cineBDrelacional';
+
+
 }
