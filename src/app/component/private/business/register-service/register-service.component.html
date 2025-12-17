@@ -1,6 +1,6 @@
-<div class="p-6 bg-gradient-to-br from-gray-800 to-gray-950 text-white rounded-xl shadow-md space-y-6">
+<div class="p-2 text-gray-800 rounded-xl shadow-md space-y-6 ">
   <div *ngIf="servicio">
-    <h2 class="text-xl font-bold mb-4">
+    <h2 class="text-xl font-normal mb-4 ">
       Registrar Servicio 
       {{ servicio === 'otros' ? 'no definido' : 'de ' + servicio | titlecase }}
     </h2>
@@ -10,64 +10,65 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <!-- Cliente -->
     <div>
-      <label class="block text-sm font-medium mb-2">Cliente</label>
+      <label class="block text-lg font-light mb-2">Cliente</label>
       <select [(ngModel)]="formData.clienteId" name="cliente"
-        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500">
+        class="w-full p-2 rounded-md bg-gray-200 focus:ring focus:ring-gray-500">
         <option *ngFor="let cliente of listaClientes" [value]="cliente.id">{{ cliente.nombre }}</option>
       </select>
     </div>
 
     <!-- Costo -->
     <div *ngIf="mostrarCampo('costo')">
-      <label class="block text-sm font-medium mb-2">Costo</label>
+      <label class="block text-lg font-light mb-2">Costo</label>
       <input type="number" [(ngModel)]="formData.costo" name="costo"
-        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500" />
+        class="w-full p-2 rounded-md bg-gray-200 focus:ring focus:ring-orange-500" />
     </div>
 
     <!-- Cantidad -->
     <div *ngIf="mostrarCampo('cantidad')">
-      <label class="block text-sm font-medium mb-2">Cantidad</label>
+      <label class="block text-lg font-light mb-2">Cantidad</label>
       <input type="number" [(ngModel)]="formData.cantidad" name="cantidad"
-        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500" />
+        class="w-full p-2 rounded-md bg-gray-200 focus:ring focus:ring-gray-500" />
     </div>
 
     <!-- Unidad -->
     <div *ngIf="mostrarCampo('unidad')">
-      <label class="block text-sm font-medium mb-2">Unidad</label>
+      <label class="block text-lg font-light mb-2">Unidad</label>
       <input type="text" [(ngModel)]="formData.unidad" name="unidad" placeholder="ej. metros / poleras"
-        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500" />
+        class="w-full p-2 rounded-md bg-gray-200 focus:ring focus:ring-gray-500" />
     </div>
 
     <!-- Descripción -->
     <div *ngIf="mostrarCampo('descripcion')">
-      <label class="block text-sm font-medium mb-2">Descripcion</label>
+      <label class="block text-lg font-light mb-2">Descripcion</label>
       <input type="text" [(ngModel)]="formData.descripcion" name="descripcion" placeholder="descripcion"
-        class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500" />
+        class="w-full p-2 rounded-md bg-gray-200 focus:ring focus:ring-gray-500" />
     </div>
 
     <!-- Agregar Tallas -->
     <div *ngIf="mostrarCampo('talla')">
-      <label class="block text-sm font-medium mb-2">Agregar Tallas</label>
+      <label class="block text-lg font-light mb-2">Agregar Tallas</label>
       <div class="flex space-x-2">
         <select [(ngModel)]="selectedTalla" name="talla"
-          class="w-full p-2 rounded-md bg-gray-800 border border-gray-700 focus:ring focus:ring-indigo-500">
+          class="w-full p-2 rounded-md bg-gray-200 border border-gray-200 focus:ring focus:ring-gray-500">
           <option *ngFor="let talla of listaTallas" [ngValue]="talla.id">
             {{ talla.talla }}: {{ talla.sexo }}: {{ talla.tipo }}
           </option>
         </select>
-        <button type="button" class="p-2 bg-gray-400 text-black border-2 rounded-lg" (click)="agregarTalla()">+</button>
+        <button type="button" class="p-2 bg-orange-400 text-black border-2 border-orange-400
+         rounded-lg" (click)="agregarTalla()">+</button>
       </div>
     </div>
   </div>
 
   <!-- === Lista Tallas === -->
   <div class="p-1" *ngIf="mostrarListaTallas()">
-    <h2 class="text-xl font-bold mb-4">Lista de Tallas del pedido</h2>
+    <h2 class="text-xl font-normal mb-4">Lista de Tallas del pedido</h2>
     <div class="grid xl:grid-cols-4 md-grid-cols-1 gap-2">
-      <div *ngFor="let item of tallasServicios; let i = index" class="border p-4 rounded shadow-md border-gray-800">
+      <div *ngFor="let item of tallasServicios; let i = index" class="border p-4 rounded shadow-md border-gray-200">
         <div class="grid grid-cols-2 gap-2">
           <div class="col-span-2">
-            <h2 class="text-xl font-bold text-center text-white">{{ item.nombre }}</h2>
+            <h2 class="text-xl font-normal text-center text-gray-800">{{ item.nombre }}</h2>
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Cantidad</label>
@@ -79,13 +80,13 @@
           </div>
         </div>
         <button (click)="eliminarTalla(i)"
-          class="mt-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-red-600 w-full">Eliminar</button>
+          class="mt-2 bg-orange-400 text-gray-800 px-4 py-2 rounded hover:bg-amber-600 w-full">Eliminar</button>
       </div>
     </div>
   </div>
 
   <!-- Botón Guardar -->
   <div class="flex items-center justify-center">
-    <button (click)="guardarServicio()" class="bg-gray-700 rounded-lg py-2 px-10 w-full">Guardar</button>
+    <button (click)="guardarServicio()" class="bg-orange-400 rounded-lg py-2 px-10 w-full">Guardar</button>
   </div>
 </div>

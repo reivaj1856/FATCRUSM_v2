@@ -1,22 +1,35 @@
-<div class="mb-6 grid gap-y-10 gap-x-6 grid-cols-2 md:grid-cols-2 xl:grid-cols-4">
-  <div class="flex flex-col col-span-2 md:col-span-2 xl:col-span-4">
-    <h2 class="text-xl font-semibold">Servicios</h2>
+
+<div class="max-w-7xl mx-auto p-6">
+  <div class="bg-white shadow-md rounded-lg p-4 mb-6">
+    <ul class="flex flex-wrap gap-4 border-b pb-2 mb-4">
+      <li routerLink="sublimacion" (click)="setActive('Sublimacion')" [ngClass]="activeItem === 'Sublimacion'
+        ? 'pb-2 border-b-2 border-orange-500 text-orange-600'
+        : 'pb-2 text-gray-600 hover:text-orange-600 hover:border-b-2 hover:border-orange-500 cursor-pointer'">
+        Sublimacion
+      </li>
+
+      <li routerLink="Vinilado" (click)="setActive('Vinilado')" [ngClass]="activeItem === 'Vinilado'
+        ? 'pb-2 border-b-2 border-orange-500 text-orange-600'
+        : 'pb-2 text-gray-600 hover:text-orange-600 hover:border-b-2 hover:border-orange-500 cursor-pointer'">
+        Vinilado
+      </li>
+
+      <li routerLink="Bordado" (click)="setActive('Bordado')" [ngClass]="activeItem === 'Bordado'
+        ? 'pb-2 border-b-2 border-orange-500 text-orange-600'
+        : 'pb-2 text-gray-600 hover:text-orange-600 hover:border-b-2 hover:border-orange-500 cursor-pointer'">
+        Bordado
+      </li>
+
+      <li routerLink="Otros" (click)="setActive('Otros')" [ngClass]="activeItem === 'Otros'
+        ? 'pb-2 border-b-2 border-orange-500 text-orange-600'
+        : 'pb-2 text-gray-600 hover:text-orange-600 hover:border-b-2 hover:border-orange-500 cursor-pointer'">
+        Otros
+      </li>
+    </ul>
+    
+    <!-- Info Message -->
+    <div>
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <a routerLink="sublimacion"
-    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950 text-gray-700 shadow-md">
-    <h2 class="p-4 text-white text-center">Sublimacion</h2>
-  </a>
-  <a routerLink="Vinilado"
-    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950 text-gray-700 shadow-md">
-    <h2 class="p-4 text-white text-center">Vinilado</h2>
-  </a>
-  <a routerLink="Bordado"
-    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950 text-gray-700 shadow-md">
-    <h2 class="p-4 text-white text-center">Bordado</h2>
-  </a>
-  <a routerLink="Otros"
-    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950 text-gray-700 shadow-md">
-    <h2 class="p-4 text-white text-center">Otros</h2>
-  </a>
 </div>
-<router-outlet></router-outlet>

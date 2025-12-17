@@ -1,34 +1,23 @@
-<aside
-  [ngClass]="[
-    'bg-gradient-to-br',
-    'from-gray-800',
-    'to-gray-950',
+<aside [ngClass]="[
+    'bg-[#282E33]',
     'fixed',
     'inset-0',
     'z-50',
-    'my-4',
-    'ml-4',
-    'h-[calc(100vh-32px)]',
-    'w-60',
-    'rounded-xl',
+    'w-40',
     'transition-transform',
     'duration-300',
     isOpen ? 'translate-x-0' : '-translate-x-80'
-  ]"
->
+  ]">
   <div class="relative border-b border-white/20">
-    <a href="#/" class="flex items-center justify-center py-6 px-8">
-      <img src="assets/Recurso2.png" alt="logo" class="w-36 h-30" />
+    <a routerLink="/private" class="flex items-center justify-center py-6 ">
+      <img src="assets/Recurso2.png" alt="logo" class="w-30 h-24" />
     </a>
 
-    <button
-      (click)="toggleMenu.emit()"
-      class="middle none font-sans font-medium text-center uppercase transition-all
+    <button (click)="toggleMenu.emit()" class="middle none font-sans font-medium text-center uppercase transition-all
              disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none
              w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-white
              hover:bg-white/10 active:bg-white/30 absolute right-0 top-0 grid
-             rounded-br-none rounded-tl-none xl:hidden"
-      type="button">
+             rounded-br-none rounded-tl-none xl:hidden" type="button">
       <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
         <!-- icono cerrar -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
@@ -38,13 +27,13 @@
       </span>
     </button>
   </div>
-  
-  <div class="m-4">
-    <ul class="mb-2 flex flex-col gap-1">
+
+  <div class="py-4">
+    <ul class="flex flex-col gap-1 mb-2">
       <li>
         <a aria-current="page" class="active" routerLink="dashboard">
           <button
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-4 px-4 capitalize"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-2 px-2 capitalize"
             type="button">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 16C9.85038 16.6303 10.8846 17 12 17C13.1154 17 14.1496 16.6303 15 16" stroke="#fff"
@@ -53,21 +42,21 @@
                 d="M22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274"
                 stroke="#fff" stroke-width="1" stroke-linecap="round" />
             </svg>
-            <p  class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-              Inicio</p>
+            <p class="block antialiased text-base leading-relaxed text-inherit font-sans font-light capitalize">
+              Mi empresa</p>
           </button>
         </a>
       </li>
     </ul>
     <ul class="mb-4 flex flex-col gap-1">
-      <li class="mx-3.5 mb-1">
-        <p class="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">
+      <li class="mx-2.5 mb-1">
+        <p class="block antialiased font-sans font-bold text-sm leading-normal text-white uppercase opacity-75">
           Servicios</p>
       </li>
       <li>
         <a aria-current="page" class="active" routerLink="costura">
           <button
-            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-4 px-4 capitalize"
+            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-2 px-2 capitalize"
             type="button">
             <svg fill="#fff" height="20" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
@@ -94,7 +83,7 @@
                 </g>
               </g>
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+            <p class="block antialiased font-sans font-light text-base leading-relaxed text-inherit capitalize">
               Costura</p>
           </button>
         </a>
@@ -102,7 +91,7 @@
       <li>
         <a aria-current="page" class="active" routerLink="especialidades">
           <button
-            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg  text-white w-full flex items-center gap-4 px-4 capitalize"
+            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg  text-white w-full flex items-center gap-2 px-2 capitalize"
             type="button">
             <svg width="20" height="20" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -124,7 +113,7 @@
 
               </path>
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+            <p class="block antialiased font-sans font-light leading-relaxed text-inherit text-base capitalize">
               Especialidades</p>
           </button>
         </a>
@@ -132,7 +121,7 @@
       <li>
         <a aria-current="page" class="active" routerLink="inventario">
           <button
-            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-4 px-4 capitalize"
+            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-2 px-1 capitalize"
             type="button">
             <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd"
@@ -145,22 +134,22 @@
                 d="M24.3162 15.0513C24.111 14.9829 23.8891 14.9829 23.6838 15.0513L8.86851 19.9889C8.64603 20.063 8.463 20.2102 8.34247 20.3985L4.39805 25.4613C4.1985 25.7175 4.13573 26.0545 4.2297 26.3653C4.32367 26.6761 4.56269 26.922 4.87072 27.0246L8.19325 28.1319L8.19595 36.7634C8.19636 38.0544 9.02257 39.2003 10.2473 39.6085L23.6291 44.0691C23.7475 44.1164 23.8738 44.1406 24.0009 44.1405C24.1293 44.141 24.2569 44.1168 24.3765 44.069L37.7577 39.6086C38.9827 39.2003 39.8089 38.054 39.809 36.7628L39.8096 28.1328L43.1346 27.0246C43.4427 26.922 43.6817 26.6761 43.7757 26.3653C43.8696 26.0545 43.8069 25.7175 43.6073 25.4613L39.6117 20.3327C39.4927 20.176 39.3274 20.0542 39.1315 19.9889L24.3162 15.0513ZM9.54341 22.1112L22.346 26.378L19.6478 29.8413L6.8452 25.5745L9.54341 22.1112ZM24.0025 24.8203L35.6526 20.9376L24 17.0541L12.35 20.9367L24.0025 24.8203ZM10.196 36.7628L10.1935 28.7986L19.686 31.9622C20.088 32.0962 20.5307 31.9623 20.7911 31.6281L23.0003 28.7924L23.0001 41.7513L10.8797 37.7112C10.4715 37.5751 10.1961 37.1931 10.196 36.7628ZM37.8095 28.7993L28.3193 31.9622C27.9174 32.0962 27.4747 31.9623 27.2143 31.6281L25.0013 28.7876L25.0049 41.7514L37.1252 37.7113C37.5336 37.5752 37.809 37.1931 37.809 36.7627L37.8095 28.7993ZM28.3576 29.8413L25.6583 26.3767L38.4609 22.1099L41.1602 25.5745L28.3576 29.8413Z"
                 fill="#fff" />
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+            <p class="block antialiased font-sans font-light text-base leading-relaxed text-inherit capitalize">
               Inventario</p>
           </button>
         </a>
       </li>
     </ul>
 
-    <ul class="mb-4 flex flex-col gap-1">
-      <li class="mx-3.5 mb-1">
-        <p class="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">
-          Servicios</p>
+    <ul class="mb-2 flex flex-col gap-1">
+      <li class="mx-2.5 mb-1">
+        <p class="block antialiased font-sans font-bold text-sm leading-normal text-white uppercase opacity-75">
+          Herramientas</p>
       </li>
       <li>
         <a aria-current="page" class="active" routerLink="cotizaciones">
           <button
-            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-4 px-4 capitalize"
+            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-2 px-2 capitalize"
             type="button">
             <svg fill="#fff" width="20" height="20" viewBox="0 0 59.998 59.998" id="Capa_1" version="1.1"
               xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -189,21 +178,56 @@
                   d="M24.651,47.627c0.615-0.929,0.909-2.041,0.814-3.172c-0.078-0.944-0.533-1.797-1.28-2.403   c-0.765-0.619-1.769-0.903-2.738-0.781l-2.802,0.35l-3.846-3.846c1.114-0.529,2.485-0.344,3.406,0.577   c0.391,0.391,1.023,0.391,1.414,0s0.391-1.023,0-1.414c-1.707-1.707-4.352-1.918-6.293-0.635l-0.779-0.779   c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414l0.781,0.781c-0.614,0.928-0.908,2.041-0.813,3.172   c0.078,0.943,0.533,1.797,1.279,2.402c0.765,0.619,1.763,0.904,2.739,0.783l2.802-0.35l3.836,3.836   c-1.111,0.501-2.51,0.318-3.396-0.568c-0.391-0.391-1.023-0.391-1.414,0c-0.391,0.39-0.391,1.023,0,1.414   c0.943,0.944,2.199,1.465,3.535,1.465c0.996,0,1.946-0.291,2.757-0.829l0.622,0.622c0.195,0.195,0.451,0.293,0.707,0.293   s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L24.651,47.627z M14.871,42.092c-0.438,0.054-0.889-0.072-1.231-0.352   c-0.319-0.26-0.514-0.62-0.547-1.016c-0.044-0.536,0.07-1.059,0.295-1.532l2.742,2.742L14.871,42.092z M21.695,43.255   c0.433-0.059,0.886,0.072,1.229,0.351c0.32,0.26,0.515,0.62,0.548,1.016c0.044,0.536-0.07,1.059-0.296,1.532l-2.741-2.741   L21.695,43.255z" />
               </g>
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+            <p class="block antialiased font-sans font-light text-base leading-relaxed text-inherit capitalize">
               Cotizacion</p>
           </button>
         </a>
       </li>
+      <li>
+        <a aria-current="page" class="active" routerLink="publicidad">
+          <button
+            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-2 px-2 capitalize"
+            type="button">
+            <svg fill="#fff" height="20px" width="20px" version="1.1" id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.52 491.52"
+              xml:space="preserve">
+              <g>
+                <g>
+                  <path d="M406.31,191.855l-111.835-30.5l30.5,111.835l33.428-33.427l32.692,32.693l14.48-14.48l-32.693-32.692L406.31,191.855z
+			 M335.445,233.75l-11.78-43.205l43.205,11.78L335.445,233.75z" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path d="M491.52,389.12V30.72H0v358.4h153.6v51.2h-40.96v20.48h266.24v-20.48h-40.96v-51.2H491.52z M20.48,51.2h450.56v256H20.48
+			V51.2z M317.44,440.32H174.08v-51.2h143.36V440.32z M20.48,368.64v-40.96h450.56v40.96H20.48z" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path d="M153.6,163.84c-16.65,0-30.72-9.38-30.72-20.48c0-11.1,14.07-20.48,30.72-20.48c16.65,0,30.72,9.38,30.72,20.48h20.48
+			c0-19.779-17.62-36.325-40.96-40.131V92.16h-20.48v11.069c-23.34,3.806-40.96,20.352-40.96,40.131
+			c0,22.585,22.97,40.96,51.2,40.96c16.65,0,30.72,9.38,30.72,20.48c0,11.1-14.07,20.48-30.72,20.48
+			c-16.65,0-30.72-9.38-30.72-20.48H102.4c0,19.779,17.62,36.325,40.96,40.131V256h20.48v-11.069
+			c23.34-3.806,40.96-20.352,40.96-40.131C204.8,182.215,181.83,163.84,153.6,163.84z" />
+                </g>
+              </g>
+            </svg>
+            <p class="block antialiased font-sans font-light text-base leading-relaxed text-inherit capitalize">
+              Publicidad</p>
+          </button>
+        </a>
+      </li>
     </ul>
-    <ul class="mb-4 flex flex-col gap-1">
-      <li class="mx-3.5 mb-1">
-        <p class="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">
-          Servicios</p>
+    <ul class="mb-2 flex flex-col gap-1">
+      <li class="mx-2.5 mb-1">
+        <p class="block antialiased font-sans text-sm leading-normal text-white font-bold uppercase opacity-75">
+          Cuenta</p>
       </li>
       <li>
         <a aria-current="page" class="active" routerLink="profile">
           <button
-            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-4 px-4 capitalize"
+            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-2 px-2 capitalize"
             type="button">
             <svg width="23" height="23" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Layer_1" version="1.1"
               xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -258,15 +282,15 @@
                 </g>
               </g>
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-              Cuenta</p>
+            <p class="block antialiased font-sans font-light text-base leading-relaxed text-inherit capitalize">
+              Perfil</p>
           </button>
         </a>
       </li>
       <li>
         <a aria-current="page" class="active" (click)="logOut()">
           <button
-            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-4 px-4 capitalize"
+            class="middle my-0.5 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-0.5 rounded-lg text-white w-full flex items-center gap-2 px-2 capitalize"
             type="button">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -277,7 +301,7 @@
                 stroke="#fff" stroke-width="1" />
               <path d="M12 11V13" stroke="#fff" stroke-width="1" stroke-linecap="round" />
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+            <p class="block antialiased font-sans font-light text-base leading-relaxed text-inherit capitalize">
               Cerrar sesion</p>
           </button>
         </a>
@@ -286,4 +310,3 @@
     </ul>
   </div>
 </aside>
-  

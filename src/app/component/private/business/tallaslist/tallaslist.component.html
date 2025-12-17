@@ -1,85 +1,128 @@
-<div class="p-6 bg-gradient-to-br from-gray-800 to-gray-950  rounded-xl shadow-sm">
-    <h2 class="text-2xl font-semibold mb-4 text-white">Lista de Tallas</h2>
+<div class="p-2 bg-white rounded-xl shadow-md ">
+  <!-- Encabezado -->
+  <div class="flex justify-between items-center mb-2 border-b border-gray-200 pb-2">
+    <h2 class="text-lg font-semibold text-slate-800">Lista de Tallas</h2>
+    <button
+      (click)="openEditModal(null)" class="flex items-center gap-2 bg-orange-400 hover:bg-orange-600 text-white px-2 py-1 rounded-lg text-sm font-semibold transition-all">
+     <img src="assets/anadir-seleccion.png" alt="logo" class="w-7 h-7" />
+      Añadir Talla
+    </button>
+  </div>
 
-    <!-- Tabla de tallas -->
-    <div class="overflow-x-auto">
-        <table class="min-w-full table-auto text-white">
-            <thead class="">
-                <tr>
-                    <th class="px-4 py-2 text-left">Tall</th>
-                    <th class="px-4 py-2 text-left">sexo</th>
-                    <th class="px-4 py-2 text-left">Descripción</th>
-                    <th class="px-4 py-2 text-left">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let t of listaTallas; let i = index" class="border-b hover:bg-gray-900">
-                    <td class="px-4 py-3">{{ t.talla}}</td>
-                    <td class="px-4 py-3 font-medium">{{ t.sexo }}</td>
-                    <td class="px-4 py-3 text-sm text-white">{{ t.tipo || '-' }}</td>
-                    <td class="px-4 py-3">
-                        <div class="flex items-center gap-2">
-                            <button (click)="openEditModal(t)"
-                                class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-white text-sm">
-                                Editar
-                            </button>
+  <!-- Tabla -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-200 rounded-lg ">
+      <thead class="bg-gray-100 text-gray-700 border-b border-gray-300">
+        <tr>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Talla</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Sexo</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Categoría</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Acciones</th>
+        </tr>
+      </thead>
 
-                            <button (click)="confirmDelete(t)"
-                                class="px-3 py-1 bg-gray-800 text-white rounded hover:bg-white text-sm">
-                                Eliminar
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr *ngIf="listaTallas?.length === 0">
-                    <td colspan="5" class="px-4 py-6 text-center text-white">No hay tallas registradas.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+      <tbody>
+        <tr *ngFor="let t of listaTallas" class="hover:bg-gray-50 transition-all border-b border-gray-300">
+          <td class="px-4 py-3 text-slate-900 font-medium">{{ t.talla }}</td>
+          <td class="px-4 py-3 text-slate-600">{{ t.sexo }}</td>
+          <td class="px-4 py-3 text-slate-600">{{ t.tipo || '-' }}</td>
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-3">
+              <!-- Editar -->
+              <button
+                (click)="openEditModal(t)"
+                class="flex items-center gap-1 text-blue-500 hover:text-blue-700 transition">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5 fill-current"
+                     viewBox="0 0 348.882 348.882">
+                  <path
+                    d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"/>
+                </svg>
+                
+              </button>
 
-    <!-- Botón nuevo -->
-    <div class="mt-4 flex justify-end ">
-        <button (click)="openEditModal(null)"
-            class="px-4 py-2 bg-gradient-to-br from-gray-600 to-gray-800 text-white rounded hover:bg-white">
-            + Nueva talla
-        </button>
-    </div>
+              <!-- Eliminar -->
+              <button
+                (click)="confirmDelete(t)"
+                class="flex items-center gap-1 text-red-500 hover:text-red-700 transition">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5 fill-current"
+                     viewBox="0 0 24 24">
+                  <path
+                    d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"/>
+                  <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"/>
+                </svg>
+                
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        <tr *ngIf="!listaTallas || listaTallas.length === 0">
+          <td colspan="4" class="px-4 py-6 text-center text-gray-500">
+            No hay tallas registradas.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<!-- Modal (editar / crear) -->
+<!-- Modal agregar/editar -->
 <div *ngIf="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-    <div class="bg-gradient-to-br from-gray-700 to-gray-950 w-full max-w-lg rounded-lg shadow-lg p-6">
-        <div class="flex items-center justify-between">
-            <h3 class="text-xl font-semibold text-white">{{ tallaSelect?.id_talla ? 'Editar Talla' : 'Nueva Talla' }}
-            </h3>
-            <button (click)="closeModal()" class="text-white hover:text-white">✕</button>
-        </div>
-
-        <form (ngSubmit)="saveTalla(talla.value, sexo.value, categoria.value)" class="mt-4 space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-white">Talla</label>
-                <input type="text" name="talla" class="mt-1 w-full rounded border-gray-300 p-2 bg-white" #talla required value="{{tallaSelect?.talla}}"/>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-white">Sexo</label>
-                <textarea name="sexo" class="mt-1 w-full rounded border-gray-300 p-2 bg-white" #sexo value="{{tallaSelect?.sexo}}"></textarea>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-white">Categoria</label>
-                <textarea name="categoria" class="mt-1 w-full rounded border-gray-300 p-2 bg-white" #categoria value="{{tallaSelect?.tipo}}"></textarea>
-            </div>
-
-            <div class="mt-4 flex justify-end gap-2">
-                <button type="button" (click)="closeModal()" class="px-4 py-2 bg-gray-200 rounded">Cancelar</button>
-                <button type="submit" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
-                    Guardar
-                </button>
-            </div>
-        </form>
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6">
+    <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+      <h3 class="text-lg font-semibold text-slate-800">
+        {{ tallaSelect?.id_talla ? 'Editar Talla' : 'Nueva Talla' }}
+      </h3>
+      <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700">✕</button>
     </div>
-</div>
 
-<!-- Modal confirmación eliminar -->
+    <form (ngSubmit)="saveTalla(talla.value, sexo.value, categoria.value)" class="mt-4 space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Talla</label>
+        <input
+          #talla
+          type="text"
+          name="talla"
+          [value]="tallaSelect?.talla"
+          class="w-full border rounded px-3 py-2 text-slate-800 focus:ring focus:ring-orange-200 outline-none"
+          required />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Sexo</label>
+        <input
+          #sexo
+          type="text"
+          name="sexo"
+          [value]="tallaSelect?.sexo"
+          class="w-full border rounded px-3 py-2 text-slate-800 focus:ring focus:ring-orange-200 outline-none" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Categoría</label>
+        <input
+          #categoria
+          type="text"
+          name="categoria"
+          [value]="tallaSelect?.tipo"
+          class="w-full border rounded px-3 py-2 text-slate-800 focus:ring focus:ring-orange-200 outline-none" />
+      </div>
+
+      <div class="flex justify-end gap-2 pt-3">
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition">
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

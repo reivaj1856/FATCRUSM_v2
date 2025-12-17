@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViniladoComponent } from './vinilado.component';
+import { PublicidadComponent } from './publicidad.component';
 
-describe('ViniladoComponent', () => {
-  let component: ViniladoComponent;
-  let fixture: ComponentFixture<ViniladoComponent>;
+describe('PublicidadComponent', () => {
+  let component: PublicidadComponent;
+  let fixture: ComponentFixture<PublicidadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViniladoComponent]
+      imports: [PublicidadComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ViniladoComponent);
+    fixture = TestBed.createComponent(PublicidadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

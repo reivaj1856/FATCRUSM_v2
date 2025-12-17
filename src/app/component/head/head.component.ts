@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../auth/data-access/auth.service';
 import authRoutes from '../../auth/features/auth.routes';
@@ -9,11 +9,13 @@ import {  Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-head',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './head.component.html',
   styleUrl: './head.component.css'
 })
 export class HeadComponent implements OnInit{
+
+  @Input() titulo: string = 'Bienvenido de nuevo';
 
   private _supabaseClient = inject(AuthService)
   private _authState = inject(AuthService);

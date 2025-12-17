@@ -1,21 +1,21 @@
 <div>
-  <div class="flex justify-center p-6 mb-12 items-center">
-    <div class="mt-12 max-w-4xl w-full bg-white shadow-lg rounded-2xl p-8">
-      <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+  <div class="flex justify-center p-6 items-center">
+    <div class=" max-w-4xl w-full bg-white shadow-lg rounded-2xl p-8">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-6">
         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Foto de perfil"
           class="w-32 h-32 rounded-full border-4 border-blue-500 shadow-md">
 
-        <div class="flex-1">
+        <div class="flex-1 text-center">
           <h1 class="text-2xl font-bold text-gray-800">{{ nombreUsuario }}</h1>
           <p class="text-gray-600 mt-1">{{ empresa }}</p>
           <p class="text-gray-500 text-sm">{{ userEmail }}</p>
 
-          <div class="mt-4 flex gap-3">
+          <div class="mt-4 flex gap-3 justify-center">
             <button (click)="abrirModal1()"
-              class="px-4 py-2 bg-gray-800 text-white rounded-lg shadow hover:bg-gray-500">
+              class="px-4 py-2 bg-orange-500 text-gray-800 rounded-lg shadow hover:bg-amber-500">
               Editar perfil
             </button>
-            <button (click)="abrirModal()" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-500">
+            <button (click)="abrirModal()" class="px-4 py-2 bg-orange-500 text-gray-800 rounded-lg hover:bg-amber-500">
               Añadir cliente
             </button>
           </div>
@@ -26,9 +26,9 @@
         <div id="modal">
           <div
             class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto">
-            <div class="w-full max-w-lg bg-gradient-to-br from-gray-800 to-gray-950 shadow-lg rounded-lg p-6 relative">
+            <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
               <div class="flex items-center pb-3 border-b border-gray-300">
-                <h3 class="text-white text-xl font-semibold flex-1">Registrar cliente</h3>
+                <h3 class="text-gray-800 text-xl font-semibold flex-1">Registrar cliente</h3>
                 <a (click)="cerrarModal()">
                   <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg"
                     class="w-3.5 h-3.5 ml-2 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500"
@@ -47,30 +47,30 @@
                 <form #clienteForm="ngForm"
                   (ngSubmit)="registrarCliente(nombreCliente.value, direccion.value, telefono.value, email.value)">
                   <div class="mb-3">
-                    <label class="block text-white text-sm mb-1">Nombre cliente</label>
+                    <label class="block text-gray-800 text-sm mb-1">Nombre cliente</label>
                     <input #nombreCliente type="text" required
-                      class="w-full border rounded px-3 py-2 border-white text-white">
+                      class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800">
                   </div>
                   <div class="mb-3">
-                    <label class="block text-white text-sm mb-1">Dirección</label>
+                    <label class="block text-gray-800 text-sm mb-1">Dirección</label>
                     <input #direccion type="text" required
-                      class="w-full border rounded px-3 py-2 border-white text-white">
+                      class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800">
                   </div>
                   <div class="mb-3">
-                    <label class="block text-white text-sm mb-1">Teléfono</label>
+                    <label class="block text-gray-800 text-sm mb-1">Teléfono</label>
                     <input #telefono type="text" required
-                      class="w-full border rounded px-3 py-2 border-white text-white">
+                      class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800">
                   </div>
                   <div class="mb-3">
-                    <label class="block text-white text-sm mb-1">Email</label>
-                    <input #email type="email" required class="w-full border rounded px-3 py-2 border-white text-white">
+                    <label class="block text-gray-800 text-sm mb-1">Email</label>
+                    <input #email type="email" required class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800">
                   </div>
                   <div class="flex justify-end gap-2">
                     <button type="button" (click)="cerrarModal()"
                       class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
                       Cancelar
                     </button>
-                    <button type="submit" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
+                    <button type="submit" class="px-4 py-2 bg-orange-500 text-gray-800 rounded hover:bg-amber-500">
                       Registrar
                     </button>
                   </div>
@@ -85,9 +85,9 @@
         <div id="modal1">
           <div
             class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto">
-            <div class="w-full max-w-lg bg-gradient-to-br from-gray-800 to-gray-950 shadow-lg rounded-lg p-6 relative">
+            <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
               <div class="flex items-center pb-3 border-b border-gray-300">
-                <h3 class="text-white text-xl font-semibold flex-1">Editar perfil</h3>
+                <h3 class="text-gray-800 text-xl font-semibold flex-1">Editar perfil</h3>
                 <a (click)="cerrarModal1()">
                   <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg"
                     class="w-3.5 h-3.5 ml-2 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500"
@@ -106,18 +106,18 @@
                 <form #clienteForm="ngForm"
                   (ngSubmit)="EditarUsuario(nombreEmpresa.value, nombretrabajador.value, email.value)">
                   <div class="mb-3">
-                    <label class="block text-white text-sm mb-1">Nombre de la empresa</label>
+                    <label class="block text-gray-800 text-sm mb-1">Nombre de la empresa</label>
                     <input #nombreEmpresa type="text" required
-                      class="w-full border rounded px-3 py-2 border-white text-white" value="{{ empresa }}">
+                      class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800" value="{{ empresa }}">
                   </div>
                   <div class="mb-3">
-                    <label class="block text-white text-sm mb-1">nombre del trabajador</label>
+                    <label class="block text-gray-800 text-sm mb-1">nombre del trabajador</label>
                     <input #nombretrabajador type="text" required
-                      class="w-full border rounded px-3 py-2 border-white text-white" value="{{ nombreUsuario }}">
+                      class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800" value="{{ nombreUsuario }}">
                   </div>
                   <div class="mb-3">
-                    <label class="block text-white text-sm mb-1">Email</label>
-                    <input #email type="email" required class="w-full border rounded px-3 py-2 border-white text-white"
+                    <label class="block text-gray-800 text-sm mb-1">Email</label>
+                    <input #email type="email" required class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800"
                       value="{{ userEmail }}">
                   </div>
                   <div class="flex justify-end gap-2">
@@ -125,7 +125,7 @@
                       class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
                       Cancelar
                     </button>
-                    <button type="submit" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
+                    <button type="submit" class="px-4 py-2 bg-orange-500 text-gray-800 rounded hover:bg-amber-500">
                       Aplicar
                     </button>
                   </div>
@@ -136,7 +136,7 @@
         </div>
 
         <button id="openModal" type="button"
-          class="mt-4 cursor-pointer mx-auto block px-4 py-2 rounded-lg text-white text-sm font-medium border-none outline-none tracking-wide bg-blue-600 hover:bg-blue-700 active:bg-blue-600">Open
+          class="mt-4 cursor-pointer mx-auto block px-4 py-2 rounded-lg text-gray-800 text-sm font-medium border-none outline-none tracking-wide bg-blue-600 hover:bg-blue-700 active:bg-blue-600">Open
           modal</button>
       </div>
 
@@ -144,89 +144,89 @@
 
 
   </div>
-  <div class="mt-12 w-full p-6">
+  <div class="w-full p-2">
     <div class="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
       <div
-        class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-800 to-gray-950 text-gray-700 shadow-md overflow-hidden xl:col-span-4">
+        class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden xl:col-span-4 px-2">
         <div
-          class="relative bg-clip-border rounded-xl overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6">
+          class="relative bg-clip-border rounded-xl overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between py-4">
           <div>
             <h6
-              class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-white mb-1">
+              class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-gray-800 mb-1">
               Lista de clientes registrados</h6>
           </div>
           <button aria-expanded="false" aria-haspopup="menu" id=":r5:"
-            class="relative middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-white0 hover:bg-white0/10 active:bg-white0/30"
+            class="relative middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-gray-8000 hover:bg-white0/10 active:bg-white0/30"
             type="button">
             <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/1">
-              <button class="text-white font-bold text-sm "></button>
+              <button class="text-gray-800 font-bold text-sm "></button>
             </span>
           </button>
         </div>
-        <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
+        <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2 rounded-sm border border-gray-300">
           <table class="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                <th class="border-b border-white py-3 px-6 text-left">
-                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-white">
+                <th class="border-b border-gray-300 py-3 px-6 text-left">
+                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-gray-800">
                     ID</p>
                 </th>
-                <th class="border-b border-white py-3 px-6 text-left">
-                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-white">Cliente
+                <th class="border-b border-gray-300 py-3 px-6 text-left">
+                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-gray-800">Cliente
                   </p>
                 </th>
-                <th class="border-b border-white py-3 px-6 text-left">
-                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-white">Direccion
+                <th class="border-b border-gray-300 py-3 px-6 text-left">
+                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-gray-800">Direccion
                   </p>
                 </th>
-                <th class="border-b border-white py-3 px-6 text-left">
-                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-white">Telefono
+                <th class="border-b border-gray-300 py-3 px-6 text-left">
+                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-gray-800">Telefono
                   </p>
                 </th>
-                <th class="border-b border-white py-3 px-6 text-left">
-                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-white">Email
+                <th class="border-b border-gray-300 py-3 px-6 text-left">
+                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-gray-800">Email
                   </p>
                 </th>
-                <th class="border-b border-white py-3 px-6 text-left">
-                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-white">Edicion
+                <th class="border-b border-gray-300 py-3 px-6 text-left">
+                  <p class="block antialiased font-sans text-[11px] font-medium uppercase text-gray-800">Edicion
                   </p>
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngIf="listaClientes && listaClientes.length < 1">
-                <td class="py-3 px-5 border-b border-white text-white">
+                <td class="py-3 px-5 border-b border-gray-300 text-gray-800">
                   <h3>No hay clientes registrados</h3>
                 </td>
               </tr>
               <tr *ngFor="let cliente of listaClientes">
                 <!-- Nombre del cliente -->
-                <td class="py-3 px-5 border-b border-white">
+                <td class="py-3 px-5 border-b border-gray-300">
                   <div class="flex items-center gap-4">
-                    <p class="block antialiased font-sans text-sm leading-normal text-white font-bold">
+                    <p class="block antialiased font-sans text-sm leading-normal text-gray-800 font-bold">
                       {{ cliente.id }}
                     </p>
                   </div>
                 </td>
 
                 <!-- Empresa -->
-                <td class="py-3 px-5 border-b border-white">
-                  <p class="block antialiased font-sans text-xs font-medium text-white">
+                <td class="py-3 px-5 border-b border-gray-300">
+                  <p class="block antialiased font-sans text-xs font-medium text-gray-800">
                     {{ cliente.nombre }}
                   </p>
                 </td>
-                <td class="py-3 px-5 border-b border-white">
-                  <p class="block antialiased font-sans text-xs font-medium text-white">
+                <td class="py-3 px-5 border-b border-gray-300">
+                  <p class="block antialiased font-sans text-xs font-medium text-gray-800">
                     {{ cliente.direccion }}
                   </p>
                 </td>
-                <td class="py-3 px-5 border-b border-white">
-                  <p class="block antialiased font-sans text-xs font-medium text-white">
+                <td class="py-3 px-5 border-b border-gray-300">
+                  <p class="block antialiased font-sans text-xs font-medium text-gray-800">
                     {{ cliente.telefono }}
                   </p>
                 </td>
-                <td class="py-3 px-5 border-b border-white">
-                  <p class="block antialiased font-sans text-xs font-medium text-white">
+                <td class="py-3 px-5 border-b border-gray-300">
+                  <p class="block antialiased font-sans text-xs font-medium text-gray-800">
                     {{ cliente.email }}
                   </p>
                 </td>
@@ -234,11 +234,11 @@
                 <!-- Estado -->
 
                 <!-- Acciones -->
-                <td class="py-3 border-b border-white">
-                  <button class="antialiased font-sans text-xs font-medium text-white mx-2" (click)="cliente.id !== undefined && abrirModal2(cliente.id)">
+                <td class="py-3 border-b border-gray-300">
+                  <button class="antialiased font-sans text-xs font-medium text-gray-800 mx-2" (click)="cliente.id !== undefined && abrirModal2(cliente.id)">
                     Editar
                   </button>
-                  <button class="antialiased font-sans text-xs font-medium text-white mx-2"
+                  <button class="antialiased font-sans text-xs font-medium text-gray-800 mx-2"
                     (click)="cliente.id !== undefined && eliminarCliente(cliente.id)">
                     Eliminar
                   </button>
@@ -254,7 +254,7 @@
                 <div
                   class="w-full max-w-lg bg-gradient-to-br from-gray-800 to-gray-950 shadow-lg rounded-lg p-6 relative">
                   <div class="flex items-center pb-3 border-b border-gray-300">
-                    <h3 class="text-white text-xl font-semibold flex-1">Editar cliente</h3>
+                    <h3 class="text-gray-800 text-xl font-semibold flex-1">Editar cliente</h3>
                     <a (click)="cerrarModal2()">
                       <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg"
                         class="w-3.5 h-3.5 ml-2 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500"
@@ -273,31 +273,31 @@
                     <form #clienteForm="ngForm"
                       (ngSubmit)="editarCliente(clienteSelect?.id!,nombreCliente.value, direccion.value, telefono.value, email.value)">
                       <div class="mb-3">
-                        <label class="block text-white text-sm mb-1">Nombre cliente</label>
+                        <label class="block text-gray-800 text-sm mb-1">Nombre cliente</label>
                         <input #nombreCliente type="text" required value="{{ clienteSelect?.nombre }}"
-                          class="w-full border rounded px-3 py-2 border-white text-white">
+                          class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800">
                       </div>
                       <div class="mb-3">
-                        <label class="block text-white text-sm mb-1">Dirección</label>
+                        <label class="block text-gray-800 text-sm mb-1">Dirección</label>
                         <input #direccion type="text" required value="{{ clienteSelect?.direccion }}"
-                          class="w-full border rounded px-3 py-2 border-white text-white">
+                          class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800">
                       </div>
                       <div class="mb-3">
-                        <label class="block text-white text-sm mb-1">Teléfono</label>
+                        <label class="block text-gray-800 text-sm mb-1">Teléfono</label>
                         <input #telefono type="text" required value="{{ clienteSelect?.telefono }}"
-                          class="w-full border rounded px-3 py-2 border-white text-white">
+                          class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800">
                       </div>
                       <div class="mb-3">
-                        <label class="block text-white text-sm mb-1">Email</label>
+                        <label class="block text-gray-800 text-sm mb-1">Email</label>
                         <input #email type="email" required value="{{ clienteSelect?.email }}"
-                          class="w-full border rounded px-3 py-2 border-white text-white">
+                          class="w-full border rounded px-3 py-2 border-gray-300 text-gray-800">
                       </div>
                       <div class="flex justify-end gap-2">
                         <button type="button" (click)="cerrarModal2()"
                           class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
                           Cancelar
                         </button>
-                        <button type="submit" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
+                        <button type="submit" class="px-4 py-2 bg-gray-600 text-gray-800 rounded hover:bg-gray-700">
                           Aplicar
                         </button>
                       </div>

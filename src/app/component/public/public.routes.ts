@@ -4,6 +4,7 @@ export default [
     {
         path: 'home',
         loadComponent: () => import('./home/home.component').then(m => m.default),
+        data: { title: 'Servicios' } 
     },
     /* {
         path: 'homelist',

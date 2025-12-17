@@ -1,22 +1,35 @@
-<div class="mb-6 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-  <div class="flex flex-row justify-between items-center col-span-2 md:col-span-2 xl:col-span-4">
-    <h2 class="text-xl font-semibold">Costura</h2>
+
+<div class="max-w-7xl mx-auto p-6">
+  <div class="bg-white shadow-md rounded-lg p-4 mb-6">
+    <ul class="flex flex-wrap gap-4 border-b pb-2 mb-4">
+      <li routerLink="pedidos" (click)="setActive('Historial de pedidos')" [ngClass]="activeItem === 'Historial de pedidos'
+        ? 'pb-2 border-b-2 border-orange-500 text-orange-600'
+        : 'pb-2 text-gray-600 hover:text-orange-600 hover:border-b-2 hover:border-orange-500 cursor-pointer'">
+        Historial de pedidos
+      </li>
+
+      <li routerLink="material" (click)="setActive('Inventario material')" [ngClass]="activeItem === 'Inventario material'
+        ? 'pb-2 border-b-2 border-orange-500 text-orange-600'
+        : 'pb-2 text-gray-600 hover:text-orange-600 hover:border-b-2 hover:border-orange-500 cursor-pointer'">
+        Inventario material
+      </li>
+
+      <li routerLink="tallas" (click)="setActive('Definir medidas')" [ngClass]="activeItem === 'Definir medidas'
+        ? 'pb-2 border-b-2 border-orange-500 text-orange-600'
+        : 'pb-2 text-gray-600 hover:text-orange-600 hover:border-b-2 hover:border-orange-500 cursor-pointer'">
+        Definir medidas
+      </li>
+
+      <li routerLink="estimado" (click)="setActive('Generar estimado')" [ngClass]="activeItem === 'Generar estimado'
+        ? 'pb-2 border-b-2 border-orange-500 text-orange-600'
+        : 'pb-2 text-gray-600 hover:text-orange-600 hover:border-b-2 hover:border-orange-500 cursor-pointer'">
+        Generar estimado
+      </li>
+    </ul>
+    
+    <!-- Info Message -->
+    <div>
+      <router-outlet></router-outlet>
     </div>
-  <a routerLink="pedidos"
-    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950  text-gray-700 shadow-md">
-    <h2 class="p-4 text-white text-center">Historial pedidos</h2>
-  </a>
-  <a routerLink="material"
-    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950  text-gray-700 shadow-md">
-    <h2 class="p-4 text-white text-center">Inventario material</h2>
-  </a>
-  <a routerLink="tallas"
-    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950  text-gray-700 shadow-md">
-    <h2 class="p-4 text-white text-center">Definir medidas</h2>
-  </a>
-  <a routerLink="estimado"
-    class="relative flex flex-col bg-clip-border rounded-xl bg-gradient-to-br from-gray-700 to-gray-950  text-gray-700 shadow-md">
-    <h2 class="p-4 text-white text-center">Generar estimado</h2>
-  </a>
+  </div>
 </div>
-<router-outlet></router-outlet>

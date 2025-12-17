@@ -10,5 +10,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './costura.component.css'
 })
 export default class CosturaComponent {
+   activeItem: string = 'Historial de pedidos'; // opcional: valor inicial
 
+  setActive(item: string) {
+    this.activeItem = item;
+  }
 }
