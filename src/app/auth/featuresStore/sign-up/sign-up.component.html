@@ -1,0 +1,54 @@
+
+<div class="min-h-screen flex justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center"
+	style="background-image: url(https://media.cnn.com/api/v1/images/stellar/prod/cnne-1513684-gettyimages-109690344.jpg?c=original);">
+	<div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+	<div class="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+<div class="grid  gap-8 grid-cols-1">
+	<div class="flex flex-col ">
+			<div class="flex flex-col sm:flex-row items-center">
+				<h2 class="font-semibold text-xl mr-auto text-grey-950">Registro de cuenta</h2>
+				<div class="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0"></div>
+			</div>
+			<div class="mt-5">
+				<form class="max-w-s mx-auto" [formGroup]="form" (ngSubmit)="submit()">
+				<div >
+					<div class="md:flex flex-row md:space-x-4 w-full text-xs">
+							<div class="mb-3 space-y-2 w-full text-xs">
+								<label class="font-semibold text-gray-600 py-2">Gmail<abbr title="required">*</abbr></label>
+								<input placeholder="Ingrese un gmail" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-2" type="text" name="email" id="email" required="" 
+                       			formControlName="email">
+								@if (isRequired('email')) {
+								<div class="text-sm m-1 ">
+                        		<small class="text-black">Por favor ingrese un email</small>
+                        		</div>
+                        	} @if (hasEmailError()) {
+                        		<div class="text-sm m-1  text-black">
+                        		<small class="text-black">El correo debe ser valido</small>
+                        		</div>
+                        	}
+							</div>
+							
+							<div class="mb-3 space-y-2 w-full text-xs">
+								<label class="font-semibold text-gray-600 py-2">Contraseña <abbr title="required">*</abbr></label>
+								<input placeholder="Ingrese una contraseña" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-2" required="" type="password" name="password" id="password" formControlName="password">
+								@if(isRequired('password')){
+                        			<div class="text-sm m-1">
+                        			<small class="text-black">Es nesesario una contraseña</small>
+                        			</div>
+                    			}
+							</div>
+						</div>
+								<div class="mt-5 text-right md:space-x-3 flex flex-col-reverse">
+									<button  type="submit"
+									class="mb-2 md:mb-0 bg-neutral-700 px-5 py-2.5 text-sm shadow-sm font-medium tracking-wider text-white rounded hover:shadow-lg hover:bg-neutral-500">Registrarse</button>
+								</div>
+								
+           						<app-boton-google (onClick) = "submitWithGoogle()" class=" md:space-x-3 px-5 py-5 flex items-center justify-center"></app-boton-google> 
+							</div>
+							</form>
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>

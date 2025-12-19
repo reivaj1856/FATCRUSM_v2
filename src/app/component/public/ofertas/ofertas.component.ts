@@ -1,14 +1,14 @@
 import { Component, computed, signal, Signal } from '@angular/core';
-import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { Product } from '../../../interface/product';
 import { realService } from '../../../services/reals.service';
 import { Router } from '@angular/router';
 import { HomelistComponent } from '../homelist/homelist.component';
+import { HeaderComponent } from "../../header/header.component";
 
 @Component({
   selector: 'app-ofertas',
-  imports: [HeaderComponent,FooterComponent,HomelistComponent],
+  imports: [HeaderComponent, FooterComponent, HomelistComponent, HeaderComponent],
   templateUrl: './ofertas.component.html',
   styles: ``
 })

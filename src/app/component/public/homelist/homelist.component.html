@@ -1,10 +1,9 @@
-
-<div class="w-full md:w-1/1">
-    <div class="py-2 mx-auto lg:max-w-6xl md:max-w-4xl">
-                
-     @if (productos.length > 0) {
+<div class="p-4 py-0 w-full md:w-1/1 ">
+    <div class="p-4 mx-auto lg:max-w-6xl md:max-w-4xl">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 sm:mb-8">Recomendaciones</h2>
+     @if (producto.length > 0) {
   <div class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
-    @for (producto of productos; track producto.id) {
+    @for (producto of producto; track producto.id) {
       <div class="bg-white flex flex-col rounded-sm overflow-hidden shadow-md hover:scale-[1.01] transition-all relative">
         <a href="javascript:void(0)" class="block" [routerLink]="['/content/producEdit',producto.id]" >
           <div class="w-full">
@@ -19,7 +18,7 @@
           </div>
         </a>
         <div class="min-h-[50px] p-4 !pt-0">
-          <button type="button" class="absolute left-0 right-0 bottom-3 cursor-pointer max-w-[88%] mx-auto text-sm px-2 py-2 font-medium w-full bg-[#333] hover:text-yellow-300 text-white tracking-wide outline-none border-none rounded-sm">Agregar al carrito</button>
+          <button type="button" (click)="agregarCarrito(producto.id)" class="absolute left-0 right-0 bottom-3 cursor-pointer max-w-[88%] mx-auto text-sm px-2 py-2 font-medium w-full bg-[#333] hover:text-yellow-300 text-white tracking-wide outline-none border-none rounded-sm">Agregar al carrito</button>
         </div>
       </div>
     }

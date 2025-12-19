@@ -1,0 +1,72 @@
+<app-head></app-head>
+<div class="flex flex-col justify-center max-w-lg mx-auto px-4 space-y-8 py-10">
+  <form class="max-w-sm mx-10" [formGroup]="form" (ngSubmit)="submit()">
+      <div>
+        <label class="mb-2 text-slate-900 font-medium text-base block">Nombre
+        </label>
+        <input type="text"
+       [value]="product.nombre"
+       placeholder="productoname"
+       class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="nombre" />
+
+      </div>
+      <div>
+        <label class="mb-2 text-slate-900 font-medium text-base block">ingrese de la imagen numero 1</label>
+        <input type='text' [value]="product.enlace" placeholder='ingrese enlace'
+          class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="enlace" />
+      </div>
+      <div>
+        <label class="mb-2 text-slate-900 font-medium text-base block">ingrese de la imagen numero 2</label>
+        <input type='text' [value]="product.enlace1" placeholder='ingrese enlace'
+          class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="enlace1"/>
+      </div>
+      <div>
+        <label class="mb-2 text-slate-900 font-medium text-base block">ingrese de la imagen numero 3</label>
+        <input type='text' [value]="product.enlace2" placeholder='ingrese enlace'
+          class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="enlace2"/>
+      </div>
+      <div>
+        <label class="mb-2 text-slate-900 font-medium text-base block">ingrese de la imagen numero 4</label>
+        <input type='text' [value]="product.enlace3" placeholder='ingrese enlace'
+          class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="enlace3"/>
+      </div>
+      <div>
+        <label class="mb-2 text-slate-900 font-medium text-base block">ingrese de la imagen numero 5</label>
+        <input type='text' [value]="product.enlace4" placeholder='ingrese enlace'
+          class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="enlace4"/>
+      </div>
+      <div>
+        <label class="mb-2 text-slate-900 font-medium text-base block">ingrese el detalle del producto</label>
+        <input type='text' [value]="product.detalles" placeholder='ingrese detalle'
+          class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="detalles"/>
+      </div>
+      <div>
+        <label class="mb-2  text-slate-900 font-medium text-base block">ingrese el precio del producto</label>
+        <input type='number' [value]="product.precio" placeholder='ingrese el precio'
+          class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="precio"/>
+      </div>
+      <div>
+        <label class="mb-2  text-slate-900 font-medium text-base block">ingrese la talla del producto</label>
+        <input type='text' [value]="product.talla" placeholder='ingrese la talla'
+          class="px-4 py-2 text-base rounded-md bg-white border border-gray-400 w-full outline-blue-500" formControlName="talla"/>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" formControlName="hombre"  /> Hombre
+        </label><br />
+        <label>
+          <input type="checkbox" formControlName="mujer"  /> Mujer
+        </label><br />
+        <label>
+          <input type="checkbox" formControlName="ninos"  /> Niños
+        </label><br />
+        <label>
+          <input type="checkbox" formControlName="ofertas" /> Producto en oferta
+        </label>
+
+      </div>
+      <button type="button" (click)="submit()"
+        class="bg-white py-2.5 min-w-[140px] cursor-pointer shadow-xl shadow-blue-200 text-black text-sm tracking-wider font-medium outline-none border border-blue-600 active:shadow-inner ">Guardar Cambios</button>
+      </form>
+    </div>
+<app-footer></app-footer>

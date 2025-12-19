@@ -1,0 +1,69 @@
+<body>
+    <section class="min-h-screen flex items-stretch text-white ">
+        <div class="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center" style="background-image: url(https://cdn.pixabay.com/photo/2016/11/19/15/40/clothes-1839935_640.jpg);">
+            <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+            <div class="w-full px-24 z-10">
+                <h1 class="text-5xl font-bold text-left tracking-wide">Sientete a la moda</h1>
+                <p class="text-3xl my-4">Con las mejores prendas del mercado.</p>
+            </div>
+        </div>
+        <div class="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0" style="background-color: #161616;">
+            <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style="background-image: url(https://i.pinimg.com/736x/af/ff/c5/afffc51afa347a0b100e4673b441698a.jpg);">
+                <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+            </div>
+            <div class="w-full py-6 z-20">
+                <h1 class="text-5xl">
+                   FATCRUSM
+                </h1>
+                <div class="py-6 space-x-2">
+                    <span class="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">f</span>
+                    <span class="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">G+</span>
+                </div>
+                <p class="text-gray-100">
+                    Ingresa tu cuenta
+                </p>
+                <form
+                    [formGroup]="form"
+                    (ngSubmit)="submit()" 
+                    class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                    <div class="pb-2 pt-4">
+                        <input type="email" name="email" id="email" placeholder="Gmail" class="block w-full p-4 text-lg rounded-sm bg-black"
+                        required=""
+                        formControlName="email"
+                        >
+                    </div>
+                    @if (isRequired('email')) {
+                        <div class="text-sm m-1">
+                        <small class="text-white">Por favor ingrese un email</small>
+                        </div>
+                        } @if (isEmailRequired()) {
+                        <div class="text-sm m-1">
+                        <small class="text-white">El correo debe ser valido</small>
+                        </div>
+                        }
+                    <div class="pb-2 pt-4">
+                        <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password" id="password" placeholder="Contraseña"
+                        required=""
+                        formControlName="password">
+                    </div>
+                    @if(isRequired('password')){
+                        <div class="text-sm m-1">
+                        <small class="text-white">Es nesesario una contraseña</small>
+                        </div>
+                    }
+                    <div class="text-right text-gray-400 hover:underline hover:text-gray-100">
+                        <a routerLink="/auth/forgot">Olvidaste tu contraseña?</a>
+                    </div>
+                   <div class="mt-5 text-right md:space-x-3 flex flex-col-reverse">
+						<button  type="submit"
+							class="mb-2 md:mb-0 bg-neutral-700 px-5 py-3 text-sm shadow-sm font-medium tracking-wider text-white rounded hover:shadow-lg hover:bg-neutral-500">Iniciar sesion</button>			
+					</div>
+                    <div class="text-right text-gray-400 hover:underline hover:text-gray-100 py-2">
+                        <a routerLink="/authStore/register">No tienes una cuenta registrate aqui?</a>
+                    </div>
+                    <app-boton-google (onClick) = "submitWithGoogle()" class=" md:space-x-3 px-5 py-5 flex items-center justify-center"></app-boton-google> 
+                </form>
+            </div>
+        </div>
+    </section>
+</body>

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../header/header.component';
+
 import { FooterComponent } from '../../footer/footer.component';
 import { toast } from 'ngx-sonner';
+import { HeadComponent } from '../../head/head.component';
+import { HeaderComponent } from "../../header/header.component";
 @Component({
   selector: 'app-pedido',
-  imports: [HeaderComponent,FooterComponent],
+  imports: [FooterComponent, HeaderComponent, HeaderComponent],
   templateUrl: './pedido.component.html'
 })
 export class PedidoComponent {

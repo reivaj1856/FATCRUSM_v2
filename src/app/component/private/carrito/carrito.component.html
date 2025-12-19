@@ -1,0 +1,66 @@
+<app-header></app-header>
+<div class="p-4">
+    <div class="max-w-screen-lg mx-auto">
+        <div class="border-b border-gray-300 pb-4">
+            <div class="flex items-center flex-wrap gap-4">
+                <h3 class="text-2xl font-semibold text-slate-900">Carrito de compras</h3>
+                
+            </div>
+        </div>
+ @if (producto.length > 0) {
+    @for (producto of producto; track producto.id) {
+        <div class="divide-y divide-gray-300 mt-6">
+            <div class="grid grid-cols-5 max-md:grid-cols-2 items-start justify-between gap-6 py-4">
+                <div class="md:col-span-2 flex items-start gap-4 max-sm:flex-col">
+                    <div class="bg-gray-100 p-2 rounded-lg w-20 h-20 shrink-0">
+                        <img src={{producto.enlace}} class="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                        <h6 class="text-[15px] font-semibold text-slate-900">{{producto.nombre}}</h6>
+                        <div class="mt-2">
+                            <p class="text-[15px] text-slate-500 font-medium">ID Pedido: <span class="ml-1 text-slate-900">{{producto.id}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h6 class="text-[15px] font-medium text-slate-500">tallas disponibles</h6>
+                    <p class="text-[15px] text-slate-900 font-medium mt-2">{{producto.talla}}</p>
+                </div>
+                <div>
+                    <h6 class="text-[15px] font-medium text-slate-500">Estado</h6>
+                    <p class="bg-green-100 text-[13px] font-medium text-green-600 mt-2 inline-block rounded-md py-1.5 px-3">Con existencias</p>
+                </div>
+                <div class="md:ml-auto">
+                    <h6 class="text-[15px] font-medium text-slate-500">Precio</h6>
+                    <p class="text-[15px] text-slate-900 font-medium mt-2">{{producto.precio}}</p>
+                    <button title="Delete" class="cursor-pointer" (click)="eliminarProductoOfList(producto.id)">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
+                    <path
+                      d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
+                      data-original="#000000" />
+                    <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
+                      data-original="#000000" />
+                  </svg>
+                </button>
+                </div>
+            </div>
+
+        </div>
+         }
+ }@else {
+    <p class="text-1xl py-35">no añadio productos al carrito</p>
+ }
+   @if (producto.length > 0) {
+     <div class="py-2">
+        <button type="button"
+        [routerLink]="['/private/venta']"
+        [state]="{ producto: producto }"
+        class="px-10 py-2.5 rounded-lg cursor-pointer text-white text-sm tracking-wider font-medium border border-current outline-none bg-[#333] hover:bg-[#222] active:bg-[#333]">
+  Realizar compra
+</button>   
+    
+    </div>
+   }
+</div>
+</div>
+<app-footer></app-footer>

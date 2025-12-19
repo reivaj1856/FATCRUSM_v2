@@ -1,0 +1,99 @@
+<mat-card style="margin: 20px; padding: 20px; max-width: 860px;">
+  <form
+    class="space-y-4 md:space-y-6"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+  >
+    <mat-card-header>
+      <mat-card-title>Crear un producto</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <!-- Nombre del producto -->
+      <div style="margin-bottom: 15px;">
+        <strong>Nombre del producto:</strong>
+        <input
+          type="text"
+          formControlName="name"
+          class="form-input"
+        />
+      </div>
+
+      <!-- Texto / Detalles -->
+      <div style="margin-bottom: 15px;">
+        <strong>Descripción del producto:</strong>
+        <textarea
+          formControlName="texto"
+          class="form-input"
+        ></textarea>
+      </div>
+
+      <!-- Imagenes -->
+      <div style="margin-bottom: 15px;">
+        <strong>Enlace imagen 1:</strong>
+        <input type="text" formControlName="imagen1" class="form-input" />
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Enlace imagen 2:</strong>
+        <input type="text" formControlName="imagen2" class="form-input" />
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Enlace imagen 3:</strong>
+        <input type="text" formControlName="imagen3" class="form-input" />
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Enlace imagen 4:</strong>
+        <input type="text" formControlName="imagen4" class="form-input" />
+      </div>
+      <div style="margin-bottom: 15px;">
+        <strong>Enlace imagen 5:</strong>
+        <input type="text" formControlName="imagen5" class="form-input" />
+      </div>
+
+      <!-- Precio -->
+      <div style="margin-bottom: 15px;">
+        <strong>Precio:</strong>
+        <input
+          type="number"
+          formControlName="costo"
+          class="form-input"
+        />
+      </div>
+
+      <!-- Talla / Medida -->
+      <div style="margin-bottom: 15px;">
+        <strong>Talla:</strong>
+        <input
+          type="text"
+          formControlName="medida"
+          class="form-input"
+        />
+      </div>
+
+      <!-- Público objetivo -->
+      <div style="margin-bottom: 15px;">
+        <strong>Dirigido a:</strong><br />
+        <label><input type="checkbox" formControlName="hombre" /> Hombre</label><br />
+        <label><input type="checkbox" formControlName="mujer" /> Mujer</label><br />
+        <label><input type="checkbox" formControlName="niños" /> Niños</label>
+      </div>
+
+      <!-- Descuento / Oferta -->
+      <div style="margin-bottom: 15px;">
+        <label><input type="checkbox" formControlName="descuentos" /> Producto en oferta</label>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button
+        [disabled]="loading()"
+        type="submit"
+        class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-800 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+      >
+        {{ loading() ? 'Guardando...' : 'Guardar' }}
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

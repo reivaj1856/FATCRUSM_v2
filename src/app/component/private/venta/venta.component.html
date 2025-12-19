@@ -1,0 +1,85 @@
+<app-header></app-header>
+    <div class="p-4">
+        <div class="max-w-screen-lg mx-auto">
+            <div class="border-b border-gray-300 pb-4">
+              <h3 class="text-xl font-semibold text-slate-900">Lista de compra</h3>
+              <div class="mt-4">
+                <p class="text-slate-500 text-sm font-medium">{{nombre}}</p>
+                <p class="text-slate-500 text-sm mt-2 font-medium">{{correo}}</p>
+              </div>
+            </div>
+            <div class="divide-y divide-gray-300 mt-6">
+            @if (producto.length > 0) {
+                 @for (producto of producto; track producto.id) {
+                  <div class="grid grid-cols-4 max-sm:grid-cols-2 items-start justify-between gap-6 py-4">
+                    <div class="col-span-2 flex sm:items-center gap-4 sm:gap-6 max-sm:flex-col">
+                        <div class="bg-gray-100 p-2 rounded-lg w-24 h-24 shrink-0">
+                          <img src={{producto.enlace}} class="w-full h-full object-contain" />
+                        </div>
+                        <div>
+                          <h6 class="text-sm font-semibold text-slate-900">{{producto.nombre}}</h6>
+                          <div class="mt-2">
+                            <p class="text-xs text-slate-500 font-medium">Talla: <span class="ml-1">S</span></p>
+                            <p class="text-xs text-slate-500 font-medium mt-1">Cantidad: <span class="ml-1">1</span></p>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h6 class="text-sm font-semibold text-slate-900">Estado</h6>
+                        <p class="bg-blue-50 text-xs font-medium text-blue-600 mt-2 inline-block rounded-sm py-1 px-2">Disponible</p>
+                    </div>
+
+                    <div class="ml-auto">
+                        <h6 class="text-sm font-semibold text-slate-900">Precio</h6>
+                        <p class="text-sm text-slate-900 font-medium mt-2">{{producto.precio}} Bs</p>
+                    </div>
+                  </div>
+                }
+            }
+
+            </div>
+
+            <hr class="border-t border-gray-300" />
+
+            <div class="max-w-md ml-auto divide-y divide-gray-300 mt-4">
+              <div class="flex justify-between gap-2 flex-wrap text-slate-500 text-sm font-medium py-4">
+                <span>Subtotal</span>
+                <span>{{subtotal}} Bs</span>
+              </div>
+              <div class="flex justify-between gap-2 flex-wrap text-slate-500 text-sm font-medium py-4">
+                <span>Envío</span>
+                <span>{{envio}} Bs</span>
+              </div>
+              <div class="flex justify-between gap-2 flex-wrap text-slate-500 text-sm font-medium py-4">
+                <span>Impuesto</span>
+                <span>{{impuesto}} Bs</span>
+              </div>
+
+              <div class="flex justify-between font-semibold text-[15px] text-slate-900 py-4">
+                <span>Total</span>
+                <span>{{total}} Bs</span>
+              </div>
+               <div class="py-2">
+                <button type="button"
+                [routerLink]="['/private/comprobante']"
+                [state]="{ producto: producto }"
+                class="px-10 py-2.5 rounded-lg cursor-pointer text-white text-sm tracking-wider font-medium border border-current outline-none bg-[#333] hover:bg-[#222] active:bg-[#333]">
+          Realizar compra
+        </button>   
+    
+    </div>
+            </div>
+        </div>
+      </div>
+     
+      <div class="bg-slate-900 px-6 py-3 gap-4">
+      <div class="flex items-center justify-center text-center relative">
+        <p class="text-[15px] text-white font-medium pr-6 leading-relaxed">🎉 ¡Oferta por tiempo limitado! Disfruta de un 100% DE DESCUENTO en en los impuestos de cada compra –
+        <a href="javascript:void(0)" class="ml-1">¡Compra ahora!</a></p>
+        <div class="absolute right-0">
+        
+        </div>
+      </div>
+    </div>
+<app-footer></app-footer>

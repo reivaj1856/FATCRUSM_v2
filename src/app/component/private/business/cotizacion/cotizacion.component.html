@@ -1,295 +1,172 @@
+<div class="grid grid-cols-1 xl:grid-cols-2 min-h-screen  p-6 gap-6">
 
-<div class=" text-gray-800 p-6">
-  <div class="max-w-6xl mx-auto">
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Formulario -->
-      <div class=" p-6 rounded-2xl shadow-sm text-gray-800 ">
-        <h2 class="text-xl font-normal mb-4 text-gray-800 ">Formulario de línea</h2>
+  <!-- IZQUIERDA: FORMULARIO -->
+  <div class="bg-white rounded-2xl shadow-md p-6">
+    <h2 class="text-xl font-bold text-orange-700 mb-4">Nueva Cotización</h2>
 
-        <div class="space-y-4">
-          <div>
-            <label class="block text-lg font-normal text-gray-800">Cliente</label>
-            <input id="cliente" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 px-2 font-light" placeholder="Nombre del cliente" />
-          </div>
+    <!-- Datos del cliente -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Cliente</label>
+      <input type="text" [(ngModel)]="cliente" placeholder="Nombre del cliente"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none" />
+    </div>
 
-          <div>
-            <label class="block text-lg font-li text-gray-800">Tipo de producto</label>
-            <select id="tipo" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 px-2 font-light">
-              <option value="Polera deportiva">Polera deportiva</option>
-              <option value="Polera">Polera</option>
-              <option value="Short">Short</option>
-              <option value="Otros">Otros</option>
-            </select>
-          </div>
+    <!-- Descripción -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Descripción</label>
+      <textarea [(ngModel)]="descripcion" rows="3" placeholder="Detalles del pedido"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"></textarea>
+    </div>
 
-          <div>
-            <label class="block text-lg font-normal  text-gray-800">Descripción / Modelo (opcional)</label>
-            <input id="descripcion" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 px-2 font-light" placeholder="Ej: Polo sublimado, tela X..." />
-          </div>
+    <!-- Botón añadir prenda -->
+    <button (click)="abrirModal()" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">
+      Añadir prenda
+    </button>
 
-          <div>
-            <label class="block text-lg font-normal  text-gray-800 ">Precio unitario (Bs.)</label>
-            <input id="precio" type="number" min="0" step="0.01" value="25" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 px-2 font-light " />
-          </div>
-
-          <div>
-            <label class="block text-lg font-normal  text-gray-800 ">Cantidades por talla</label>
-            <div class="mt-2 grid grid-cols-3 gap-2">
-              <div>
-                <label class="text-xs">S</label>
-                <input id="talla_S" type="number" min="0" value="0" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 " />
-              </div>
-              <div>
-                <label class="text-xs">M</label>
-                <input id="talla_M" type="number" min="0" value="0" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 " />
-              </div>
-              <div>
-                <label class="text-xs">L</label>
-                <input id="talla_L" type="number" min="0" value="0" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 " />
-              </div>
-              <div>
-                <label class="text-xs">XL</label>
-                <input id="talla_XL" type="number" min="0" value="0" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 " />
-              </div>
-              <div>
-                <label class="text-xs">XXL</label>
-                <input id="talla_XXL" type="number" min="0" value="0" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 " />
-              </div>
-              <div>
-                <label class="text-xs">Otros</label>
-                <input id="talla_OTRO" type="number" min="0" value="0" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm text-gray-800 " />
-              </div>
-            </div>
-          </div>
-
-          <div class="flex gap-2">
-            <button id="agregarBtn" class="px-4 py-2 bg-orange-500 text-gray-800  rounded-lg shadow hover:bg-gray-700">Agregar al presupuesto</button>
-            <button id="limpiarBtn" class="px-4 py-2 bg-orange-500 rounded-lg">Limpiar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vista previa del presupuesto y lista de líneas -->
-      <div class="p-6 rounded-2xl shadow-sm text-gray-800  flex flex-col">
-        <div class="flex items-start justify-between">
-          <h2 class="text-xl font-semibold">Presupuesto</h2>
-          <div class="text-sm text-gray-500">Vista previa en tiempo real</div>
-        </div>
-
-        <div class="mt-4 flex-1">
-          <div id="lineasContainer" class="space-y-3">
-            <p class="text-gray-500">No hay líneas. Agrega productos desde el formulario.</p>
-          </div>
-        </div>
-
-        <div class="mt-4 border-t pt-4">
-          <div class="flex justify-between"><span class="font-medium text-gray-800 ">Subtotal</span><span id="subtotal">Bs. 0.00</span></div>
-          <div class="flex justify-between mt-1"><span class="text-sm text-gray-600">Descuento (%)</span><input id="descuento" type="number" min="0" max="100" value="0" class="w-24 text-right rounded-lg border-gray-200 shadow-sm text-gray-800 " /></div>
-          <div class="flex justify-between mt-2"><span class="font-semibold">Total</span><span id="total" class="font-semibold">Bs. 0.00</span></div>
-
-          <div class="mt-4 flex gap-2">
-            <button id="generarBtn" class="px-4 py-2 bg-orange-500 text-gray-800  rounded-lg shadow">Generar presupuesto</button>
-            <button id="vaciarBtn" class="px-4 py-2 bg-orange-500 text-gray-800  rounded-lg">Vaciar</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Área imprimible -->
-    <div id="presupuestoPrint" class="hidden mt-8 bg-white p-6 rounded-2xl shadow-sm text-gray-800 ">
-      <div class="flex justify-between items-center">
-        <div>
-          <h3 class="text-2xl font-bold" id="titCliente">Presupuesto</h3>
-          <p class="text-sm text-gray-600" id="fechaPres">Fecha: </p>
-        </div>
-        <div class="text-right">
-          <p class="font-semibold">COTIZACIÓN</p>
-        </div>
-      </div>
-
-      <table class="w-full mt-4 text-sm table-auto border-collapse">
-        <thead>
-          <tr class="bg-gray-100">
-            <th class="p-2 text-left">Producto</th>
-            <th class="p-2 text-left">Descripción</th>
-            <th class="p-2 text-left">Cantidades</th>
-            <th class="p-2 text-right">Precio unit.</th>
-            <th class="p-2 text-right">Subtotal</th>
+    <!-- Tabla de prendas -->
+    <div *ngIf="prendas.length > 0" class="mt-4">
+      <h3 class="font-semibold mb-2">Prendas agregadas</h3>
+      <table class="w-full border border-gray-300 rounded-lg">
+        <thead class="bg-orange-100">
+          <tr>
+            <th class="py-2">Cantidad</th>
+            <th class="py-2">Talla</th>
+            <th class="py-2">Sexo</th>
+            <th class="py-2">Precio</th>
+            <th class="py-2">Subtotal</th>
           </tr>
         </thead>
-        <tbody id="printBody"></tbody>
+        <tbody>
+          <tr *ngFor="let p of prendas" class="text-center border-t">
+            <td>{{ p.cantidad }}</td>
+            <td>{{ p.talla }}</td>
+            <td>{{ p.sexo }}</td>
+            <td>{{ p.precio | currency:'BOB' }}</td>
+            <td>{{ p.cantidad * p.precio | currency:'BOB' }}</td>
+          </tr>
+        </tbody>
       </table>
+    </div>
 
-      <div class="mt-4 flex justify-end">
-        <div class="w-64">
-          <div class="flex justify-between"><span>Subtotal</span><span id="p_subtotal">Bs. 0.00</span></div>
-          <div class="flex justify-between mt-1"><span>Descuento</span><span id="p_desc">Bs. 0.00</span></div>
-          <div class="flex justify-between mt-2 font-bold"><span>Total</span><span id="p_total">Bs. 0.00</span></div>
-        </div>
-      </div>
-
-      <div class="mt-6 flex gap-2 justify-end">
-        <button id="printBtn" class="px-4 py-2 bg-indigo-600 text-gray-800  rounded-lg">Imprimir</button>
-        <button id="cerrarPrint" class="px-4 py-2 bg-gray-200 rounded-lg">Cerrar</button>
-      </div>
+    <!-- Total -->
+    <div class="mt-4 text-right text-lg font-semibold text-orange-700">
+      Total: {{ calcularTotal() | currency:'BOB' }}
     </div>
   </div>
 
-<script>
-  // Estado simple en memoria
-  const lines = [];
+  <!-- DERECHA: BORRADOR -->
+  <!-- DERECHA: COTIZACIÓN EN BORRADOR -->
+<div id="cotizacion-preview" class="flex justify-center bg-gray-50  rounded-2xl shadow-md">
+  <div class="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-8 font-sans text-gray-800">
 
-  function numberToBs(n){
-    return 'Bs. ' + Number(n).toFixed(2);
-  }
-
-  function sumarCantidades(line){
-    return (line.cantidades.S||0) + (line.cantidades.M||0) + (line.cantidades.L||0) + (line.cantidades.XL||0) + (line.cantidades.XXL||0) + (line.cantidades.OTRO||0);
-  }
-
-  function recalcular(){
-    const subtotalEl = document.getElementById('subtotal');
-    const descuentoInp = document.getElementById('descuento');
-    let subtotal = 0;
-    lines.forEach(l => subtotal += l.precio * sumarCantidades(l));
-    subtotalEl.textContent = numberToBs(subtotal);
-    const descPct = parseFloat(descuentoInp.value) || 0;
-    const descuento = subtotal * (descPct/100);
-    const total = subtotal - descuento;
-    document.getElementById('total').textContent = numberToBs(total);
-  }
-
-  function renderLines(){
-    const cont = document.getElementById('lineasContainer');
-    cont.innerHTML = '';
-    if(lines.length === 0){
-      cont.innerHTML = '<p class="text-gray-500">No hay líneas. Agrega productos desde el formulario.</p>';
-      recalcular();
-      return;
-    }
-    lines.forEach((l, idx) => {
-      const div = document.createElement('div');
-      div.className = 'p-3 border rounded-lg flex items-center justify-between';
-      const qtyText = `S:${l.cantidades.S||0} M:${l.cantidades.M||0} L:${l.cantidades.L||0} XL:${l.cantidades.XL||0} XXL:${l.cantidades.XXL||0} O:${l.cantidades.OTRO||0}`;
-      div.innerHTML = `
+    <!-- Encabezado -->
+    <div class="flex items-center justify-between border-b-2 border-orange-400 pb-4 mb-4">
+      <div class="flex items-center space-x-4">
+        <img src="assets/Recurso2.png" alt="Logo empresa" class="w-20 h-20 object-contain" />
         <div>
-          <div class="font-semibold">${l.tipo} <span class="text-sm text-gray-500">(${l.descripcion || '—'})</span></div>
-          <div class="text-sm text-gray-600">${qtyText}</div>
+          <h1 class="text-2xl font-bold text-orange-600 leading-tight">{{empresa}}</h1>
+          <p class="text-sm text-gray-600">Cotización de Pedido</p>
         </div>
-        <div class="text-right">
-          <div class="text-sm">${numberToBs(l.precio)} c/u</div>
-          <div class="font-semibold">${numberToBs(l.precio * sumarCantidades(l))}</div>
-          <div class="mt-2 flex gap-2 justify-end">
-            <button onclick="editarLinea(${idx})" class="text-xs px-2 py-1 bg-yellow-200 rounded">Editar</button>
-            <button onclick="eliminarLinea(${idx})" class="text-xs px-2 py-1 bg-red-200 rounded">Eliminar</button>
-          </div>
-        </div>
-      `;
-      cont.appendChild(div);
-    });
-    recalcular();
-  }
+      </div>
+      <div class="text-right text-sm text-gray-500">
+        <p>Fecha: {{ fechaActual }}</p>
+      </div>
+    </div>
 
-  function recogerFormulario(){
-    const tipo = document.getElementById('tipo').value;
-    const descripcion = document.getElementById('descripcion').value;
-    const precio = parseFloat(document.getElementById('precio').value) || 0;
-    const cantidades = {
-      S: parseInt(document.getElementById('talla_S').value) || 0,
-      M: parseInt(document.getElementById('talla_M').value) || 0,
-      L: parseInt(document.getElementById('talla_L').value) || 0,
-      XL: parseInt(document.getElementById('talla_XL').value) || 0,
-      XXL: parseInt(document.getElementById('talla_XXL').value) || 0,
-      OTRO: parseInt(document.getElementById('talla_OTRO').value) || 0,
-    };
-    return { tipo, descripcion, precio, cantidades };
-  }
+    <!-- Datos principales -->
+    <div class="mb-6">
+      <p class="text-sm"><strong class="text-gray-700">Cliente:</strong> {{ cliente || '---' }}</p>
+      <p class="text-sm"><strong class="text-gray-700">Descripción:</strong> {{ descripcion || '---' }}</p>
+    </div>
 
-  document.getElementById('agregarBtn').addEventListener('click', (e)=>{
-    e.preventDefault();
-    const linea = recogerFormulario();
-    if(sumarCantidades(linea) === 0){
-      alert('Ingresa al menos una cantidad.');
-      return;
-    }
-    lines.push(linea);
-    renderLines();
-    limpiarForm();
-  });
+    <!-- Tabla de prendas -->
+    <div *ngIf="prendas.length > 0; else sinPrendas">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-orange-100 text-orange-700 uppercase text-xs">
+            <th class="py-2 px-3 border border-gray-200">Cantidad</th>
+            <th class="py-2 px-3 border border-gray-200">Talla</th>
+            <th class="py-2 px-3 border border-gray-200">Sexo</th>
+            <th class="py-2 px-3 border border-gray-200">Precio</th>
+            <th class="py-2 px-3 border border-gray-200">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of prendas" class="border-b border-gray-200 hover:bg-orange-50 transition">
+            <td class="py-2 px-3 text-center">{{ p.cantidad }}</td>
+            <td class="py-2 px-3 text-center">{{ p.talla }}</td>
+            <td class="py-2 px-3 text-center">{{ p.sexo }}</td>
+            <td class="py-2 px-3 text-center">{{ p.precio | currency:'BOB' }}</td>
+            <td class="py-2 px-3 text-center font-medium text-orange-600">
+              {{ p.cantidad * p.precio | currency:'BOB' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  document.getElementById('limpiarBtn').addEventListener('click', (e)=>{ e.preventDefault(); limpiarForm(); });
-  document.getElementById('vaciarBtn').addEventListener('click', (e)=>{ e.preventDefault(); if(confirm('Vaciar todo el presupuesto?')){ lines.length=0; renderLines(); } });
+    <ng-template #sinPrendas>
+      <p class="text-center text-gray-400 italic py-8">No se han agregado prendas aún.</p>
+    </ng-template>
 
-  document.getElementById('descuento').addEventListener('input', ()=> recalcular());
+    <!-- Total -->
+    <div class="flex justify-end items-center mt-6 border-t border-orange-200 pt-4">
+      <span class="text-lg font-semibold text-gray-700 mr-2">Total:</span>
+      <span class="text-xl font-bold text-orange-600">{{ calcularTotal() | currency:'BOB' }}</span>
+    </div>
 
-  function limpiarForm(){
-    document.getElementById('descripcion').value = '';
-    document.getElementById('precio').value = '25';
-    ['S','M','L','XL','XXL','OTRO'].forEach(t => document.getElementById('talla_'+t).value = 0);
-  }
-
-  function eliminarLinea(i){ lines.splice(i,1); renderLines(); }
-
-  function editarLinea(i){
-    const l = lines[i];
-    document.getElementById('tipo').value = l.tipo;
-    document.getElementById('descripcion').value = l.descripcion;
-    document.getElementById('precio').value = l.precio;
-    ['S','M','L','XL','XXL','OTRO'].forEach(t => document.getElementById('talla_'+t).value = l.cantidades[t] || 0);
-    // eliminar para editar (se volverá a agregar)
-    lines.splice(i,1);
-    renderLines();
-    window.scrollTo({top:0, behavior:'smooth'});
-  }
-
-  document.getElementById('generarBtn').addEventListener('click', (e)=>{
-    e.preventDefault();
-    if(lines.length === 0){ alert('No hay líneas en el presupuesto.'); return; }
-    // llenar área imprimible
-    const print = document.getElementById('presupuestoPrint');
-    const cliente = document.getElementById('cliente').value || '—';
-    document.getElementById('titCliente').textContent = `Presupuesto para: ${cliente}`;
-    document.getElementById('fechaPres').textContent = 'Fecha: ' + new Date().toLocaleString();
-
-    const body = document.getElementById('printBody');
-    body.innerHTML = '';
-    let subtotal = 0;
-    lines.forEach(l => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td class="p-2 align-top">${l.tipo}</td>
-        <td class="p-2 align-top">${l.descripcion || '—'}</td>
-        <td class="p-2 align-top text-sm">S:${l.cantidades.S||0} M:${l.cantidades.M||0} L:${l.cantidades.L||0} XL:${l.cantidades.XL||0} XXL:${l.cantidades.XXL||0} O:${l.cantidades.OTRO||0}</td>
-        <td class="p-2 align-top text-right">${numberToBs(l.precio)}</td>
-        <td class="p-2 align-top text-right">${numberToBs(l.precio * sumarCantidades(l))}</td>
-      `;
-      body.appendChild(tr);
-      subtotal += l.precio * sumarCantidades(l);
-    });
-
-    const descPct = parseFloat(document.getElementById('descuento').value) || 0;
-    const descuento = subtotal * (descPct/100);
-    const total = subtotal - descuento;
-
-    document.getElementById('p_subtotal').textContent = numberToBs(subtotal);
-    document.getElementById('p_desc').textContent = numberToBs(descuento);
-    document.getElementById('p_total').textContent = numberToBs(total);
-
-    // mostrar
-    print.classList.remove('hidden');
-    print.scrollIntoView({behavior:'smooth'});
-  });
-
-  document.getElementById('cerrarPrint').addEventListener('click', ()=>{
-    document.getElementById('presupuestoPrint').classList.add('hidden');
-  });
-
-  document.getElementById('printBtn').addEventListener('click', ()=>{
-    window.print();
-  });
-
-  // primer render
-  renderLines();
-</script>
+    <!-- Botón imprimir -->
+    <div class="text-center mt-6">
+      <button
+        (click)="imprimir()"
+        class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition-all"
+      >
+        🖨️ Imprimir Cotización
+      </button>
+    </div>
+  </div>
 </div>
 
+
+  <!-- MODAL DE AÑADIR PRENDA -->
+  <div *ngIf="mostrarModal"
+    class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-xl shadow-lg w-80">
+      <h3 class="text-lg font-bold mb-3 text-orange-600">Añadir prenda</h3>
+
+      <div class="mb-2">
+        <label class="block text-sm font-medium">Cantidad</label>
+        <input type="number" [(ngModel)]="nuevaPrenda.cantidad"
+          class="w-full border border-gray-300 rounded-lg px-3 py-1" />
+      </div>
+
+      <div class="mb-2">
+        <label class="block text-sm font-medium">Talla</label>
+        <input type="text" [(ngModel)]="nuevaPrenda.talla"
+          class="w-full border border-gray-300 rounded-lg px-3 py-1" />
+      </div>
+
+      <div class="mb-2">
+        <label class="block text-sm font-medium">Sexo</label>
+        <select [(ngModel)]="nuevaPrenda.sexo" class="w-full border border-gray-300 rounded-lg px-3 py-1">
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+          <option value="Niño">Niño</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="block text-sm font-medium">Precio unitario (BOB)</label>
+        <input type="number" [(ngModel)]="nuevaPrenda.precio"
+          class="w-full border border-gray-300 rounded-lg px-3 py-1" />
+      </div>
+
+      <div class="flex justify-end space-x-2">
+        <button (click)="cerrarModal()" class="bg-gray-300 px-3 py-1 rounded-lg">Cancelar</button>
+        <button (click)="guardarPrenda()" class="bg-orange-500 text-white px-3 py-1 rounded-lg hover:bg-orange-600">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

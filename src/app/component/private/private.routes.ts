@@ -51,5 +51,16 @@ export default [
             },
         ]
     },
-    
+    {
+        path: 'carrito',
+        loadComponent: () => import('./carrito/carrito.component').then(m => m.default),
+    },
+    {
+        path: 'venta',
+        loadComponent: () => import('./venta/venta.component').then(m => m.default),
+    },
+    {
+        path: 'comprobante',
+        loadComponent: () => import('./proforma/proforma.component').then(m => m.default),
+    }, 
 ] as Routes

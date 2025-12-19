@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { toast } from 'ngx-sonner';
-import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
+import { HeadComponent } from '../../head/head.component';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-novedades',
   standalone: true,
   imports: [CommonModule, HeaderComponent, FooterComponent], // Agrega CommonModule aquí
   templateUrl: './novedades.component.html',
-  styleUrl: './novedades.component.css'
+  styleUrls: ['./novedades.component.css']
 })
 export class NovedadesComponent {
   imagenes = [

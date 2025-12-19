@@ -3,17 +3,18 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { realService } from '../../../services/reals.service';
 import { Product } from '../../../interface/product';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FormProduc } from '../../admin/product-edit/product-edit.component';
-import { HeaderComponent } from '../../header/header.component';
+import { FormProduc } from '../admin/product-edit/product-edit.component';
+
 import { FooterComponent } from '../../footer/footer.component';
-import { Usuario } from '../../../interface/user';
+import { Usuario } from '../../../interface/User';
 import { toast } from 'ngx-sonner';
 import { DataAccessService } from '../../../services/data-access.service';
 import { Auth } from '@angular/fire/auth';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-homeproduct',
-  imports: [HeaderComponent,FooterComponent,RouterLink],
+  imports: [FooterComponent,RouterLink,HeaderComponent],
   templateUrl: './homeproduct.component.html',
   styles: ``
 })

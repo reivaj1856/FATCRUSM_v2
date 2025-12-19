@@ -1,15 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { Component, inject } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-publicidad',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './publicidad.component.html',
   styleUrl: './publicidad.component.css'
 })
 export default class PublicidadComponent {
-   mostrarModalProducto = false;
+  mostrarModalProducto = false;
+  private _authState = inject(AuthService);
+  private _router = inject(Router);
+
+  async logOut(){
+    await this._authState.cerrarSesion();
+    
+  }
 
   abrirModalProducto(): void {
     this.mostrarModalProducto = true;
@@ -19,6 +28,11 @@ export default class PublicidadComponent {
     this.mostrarModalProducto = false;
   }
 
+  passWeb() {
+
+    this._router.navigateByUrl('authStore');
+  }
+
   // ==============================
   // LISTA TEMPORAL DE PUBLICIDAD
   // ==============================
@@ -26,12 +40,12 @@ export default class PublicidadComponent {
     {
       titulo: 'Confección de Trajes Personalizados',
       descripcion: 'Diseños exclusivos hechos a medida',
-      imagen: 'assets/img/publicidad1.jpg'
+      imagen: 'https://cdn-icons-png.flaticon.com/512/1685/1685485.png'
     },
     {
       titulo: 'Poleras y Chaquetas',
       descripcion: 'Ropa casual y deportiva para toda ocasión',
-      imagen: 'assets/img/publicidad2.jpg'
+      imagen: 'https://cdn-icons-png.flaticon.com/256/545/545485.png'
     }
   ];
 
