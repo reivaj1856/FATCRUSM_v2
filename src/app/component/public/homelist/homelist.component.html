@@ -14,7 +14,7 @@
           <div class="p-4">
             <h5 class="text-sm sm:text-base font-semibold text-slate-900 line-clamp-2">{{producto.nombre}}</h5>
             <div class="mt-2 flex items-center flex-wrap gap-2">
-              <h6 class="text-sm sm:text-base font-semibold text-slate-900">{{producto.tallas[0]?.precio}} Bs.</h6>
+              <h6 class="text-sm sm:text-base font-semibold text-slate-900">{{producto.tallas[0]?.precio||0}} Bs.</h6>
             </div>
           </div>
         </a>

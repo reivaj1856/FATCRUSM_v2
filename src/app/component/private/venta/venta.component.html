@@ -10,11 +10,11 @@
             </div>
             <div class="divide-y divide-gray-300 mt-6">
             @if (producto.length > 0) {
-                 @for (producto of producto; track producto.id) {
+                 @for (producto of producto; track producto.id_product) {
                   <div class="grid grid-cols-4 max-sm:grid-cols-2 items-start justify-between gap-6 py-4">
                     <div class="col-span-2 flex sm:items-center gap-4 sm:gap-6 max-sm:flex-col">
                         <div class="bg-gray-100 p-2 rounded-lg w-24 h-24 shrink-0">
-                          <img src={{producto.enlace}} class="w-full h-full object-contain" />
+                          <img [src]="producto.imagenes[0]" class="w-full h-full object-contain" />
                         </div>
                         <div>
                           <h6 class="text-sm font-semibold text-slate-900">{{producto.nombre}}</h6>
@@ -32,7 +32,7 @@
 
                     <div class="ml-auto">
                         <h6 class="text-sm font-semibold text-slate-900">Precio</h6>
-                        <p class="text-sm text-slate-900 font-medium mt-2">{{producto.precio}} Bs</p>
+                        <p class="text-sm text-slate-900 font-medium mt-2">{{producto.tallas[0].precio}} Bs</p>
                     </div>
                   </div>
                 }
