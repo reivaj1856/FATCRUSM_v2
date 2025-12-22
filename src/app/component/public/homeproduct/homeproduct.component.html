@@ -69,7 +69,7 @@
 
           <div class="mt-8">
             <div class="flex items-center flex-wrap gap-4">
-              <p class="text-slate-900 text-4xl font-semibold">{{product.tallas[0]?.precio}} Bs</p>
+              <p class="text-slate-900 text-4xl font-semibold">{{ (product.tallas && product.tallas.length) ? product.tallas[0].precio : 'N/A' }} Bs</p>
               <p class="text-slate-400 text-sm mt-2"><span class="ml-1">Envio incluido</span></p>
             </div>
           </div>
