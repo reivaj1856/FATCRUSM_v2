@@ -12,7 +12,6 @@ import { DataAccessService } from '../../../services/data-access.service';
 import { Auth } from '@angular/fire/auth';
 import { HeaderComponent } from '../../header/header.component';
 import { NgFor, NgIf } from '@angular/common';
-import CarritoComponent from '../../private/carrito/carrito.component';
 
 @Component({
   selector: 'app-homeproduct',
@@ -26,7 +25,6 @@ export class HomeproductComponent {
   data = inject(DataAccessService);
   private _formBuilder = inject(FormBuilder);
   private serviceData = inject(realService);
-  private carritoService = inject(CarritoComponent);
 
   productID!: string;
 
@@ -112,7 +110,11 @@ export class HomeproductComponent {
   }
   crearVenta() {
     this.serviceData.crearVenta(this.product.nombre, 1, this.product.tallas[0].precio);
-    this.carritoService.eliminarProductoOfList(this.product.id_producto+"");
+    // Eliminar el producto del carrito del usuario mediante el servicio central (DataAccessService)
+    if (this.usuario) {
+      this.data.eliminarProductoCarrito(this.usuario.id, this.product.id_producto+"")
+        .catch(err => console.error('Error eliminando producto del carrito tras venta:', err));
+    }
   }
   
 }

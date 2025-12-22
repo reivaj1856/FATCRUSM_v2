@@ -61,6 +61,20 @@ export class DataAccessService {
     await setDoc(docRef, usuario);
   }
 
+  // Elimina un producto del array 'carrito' del usuario usando arrayRemove
+  async eliminarProductoCarrito(id: string, productoId: string): Promise<void> {
+    try {
+      const { doc, updateDoc, arrayRemove } = await import('@angular/fire/firestore');
+      const docRef = doc(this.firestore, `User/${id}`);
+      await updateDoc(docRef, {
+        carrito: arrayRemove(productoId)
+      });
+    } catch (error) {
+      console.error('Error eliminando producto del carrito:', error);
+      throw error;
+    }
+  }
+
   async getVentas(): Promise<Venta[]> {
     try {
       const ventasRef = collection(this.firestore, 'ventas');
