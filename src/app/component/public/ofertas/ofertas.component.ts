@@ -21,7 +21,8 @@ export class OfertasComponent {
     const products = this.allProducts();
 
     if (cat === 'all') return products;
-    return products.filter(p => p[cat]);
+    // Cast to any because Product doesn't have all possible category keys in its type definition
+    return products.filter(p => Boolean((p as any)[cat]));
   });
   filterByCategory(category: 'hombre' | 'mujer' | 'ninos' | 'ofertas') {
     console.log('Filtro aplicado:', category);

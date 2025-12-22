@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
+import { AuthServiceStore } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { hasEmailError, isRequired } from '../../../segurity/validators';
 import { toast } from 'ngx-sonner';
@@ -25,10 +25,10 @@ interface FormSignIn {
 })
 export default class SignInComponent {
   private _formBuilder = inject(FormBuilder);
-  private _authService = inject(AuthService);
+  private _authService = inject(AuthServiceStore);
   private _dataService = inject(DataAccessService);
 
-  constructor(private router: Router, public auth: AuthService) {}
+  constructor(private router: Router, public auth: AuthServiceStore) {}
 
   isRequired(field: 'email' | 'password') {
     return isRequired(field, this.form);

@@ -14,7 +14,15 @@ export interface User{
     visible : boolean;
     email : string;
 }
+
 export interface UserStore {
+  id: string;
+  correo: string;
+  admin: boolean;
+  carrito: string[];
+}
+
+export interface UsuarioStore {
   email: string;
   password: string;
 }

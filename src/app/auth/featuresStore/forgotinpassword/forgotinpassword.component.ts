@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toast } from 'ngx-sonner';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { AuthServiceStore } from '../../../services/auth.service';
 
 interface FormSignUp {
   email: FormControl<string | null>;
@@ -19,7 +19,7 @@ export default class ForgotinpasswordComponent {
     throw new Error('Method not implemented.');
     }
       private _formBuilder = inject(FormBuilder);
-      private _authService = inject(AuthService);
+      private _authService = inject(AuthServiceStore);
     
       constructor(private _router: Router) {}
     

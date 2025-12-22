@@ -8,23 +8,30 @@
             </div>
         </div>
  @if (producto.length > 0) {
-    @for (producto of producto; track producto.id) {
+    @for (producto of producto; track producto.id_product) {
         <div class="divide-y divide-gray-300 mt-6">
             <div class="grid grid-cols-5 max-md:grid-cols-2 items-start justify-between gap-6 py-4">
                 <div class="md:col-span-2 flex items-start gap-4 max-sm:flex-col">
                     <div class="bg-gray-100 p-2 rounded-lg w-20 h-20 shrink-0">
-                        <img src={{producto.enlace}} class="w-full h-full object-contain" />
+                        <img [src]="producto.imagenes[2]" class="w-full h-full object-contain" />
                     </div>
                     <div>
                         <h6 class="text-[15px] font-semibold text-slate-900">{{producto.nombre}}</h6>
                         <div class="mt-2">
-                            <p class="text-[15px] text-slate-500 font-medium">ID Pedido: <span class="ml-1 text-slate-900">{{producto.id}}</span></p>
+                            <p class="text-[15px] text-slate-500 font-medium">ID Pedido: <span class="ml-1 text-slate-900">{{producto.id_product}}</span></p>
                         </div>
                     </div>
                 </div>
                 <div>
                     <h6 class="text-[15px] font-medium text-slate-500">tallas disponibles</h6>
-                    <p class="text-[15px] text-slate-900 font-medium mt-2">{{producto.talla}}</p>
+                    <div class="flex flex-wrap gap-4 mt-4 font-semibold text-2xl">
+                    <ng-container *ngIf="producto.tallas && producto.tallas.length; else noTallas">
+                        <ng-container *ngFor="let t of producto.tallas; let i = index">
+                        <span>{{ t.nombre }}<span *ngIf="i < producto.tallas.length - 1">, </span></span>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #noTallas>N/A</ng-template>
+            </div>
                 </div>
                 <div>
                     <h6 class="text-[15px] font-medium text-slate-500">Estado</h6>
@@ -32,8 +39,8 @@
                 </div>
                 <div class="md:ml-auto">
                     <h6 class="text-[15px] font-medium text-slate-500">Precio</h6>
-                    <p class="text-[15px] text-slate-900 font-medium mt-2">{{producto.precio}}</p>
-                    <button title="Delete" class="cursor-pointer" (click)="eliminarProductoOfList(producto.id)">
+                    <p class="text-[15px] text-slate-900 font-medium mt-2">{{producto.tallas[0]?.precio}}</p>
+                    <button title="Delete" class="cursor-pointer" (click)="producto.id_product ? eliminarProductoOfList(producto.id_product.toString()) : null">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
                     <path
                       d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"

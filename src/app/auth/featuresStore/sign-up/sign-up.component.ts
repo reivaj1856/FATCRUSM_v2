@@ -1,19 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
+import { AuthServiceStore } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthStateService } from '../../../segurity/acces/auth-state.service';
 import { hasEmailError, isRequired } from '../../../segurity/validators';
 import { toast } from 'ngx-sonner';
 import { authState, user } from '@angular/fire/auth';
-import { User, UserStore, Usuario } from '../../../interface/User';
+import { User, UserStore, Usuario, UsuarioStore } from '../../../interface/User';
 import { BotonGoogleComponent } from '../button-google/boton-google.component';
 import { CreateService } from '../create.service';
 import { DataAccessService } from '../../../services/data-access.service';
+import { UsuarioCreateStore } from '../../features/sign-up/sign-up.component';
 
-export type UserCreate = Omit<UserStore,'id'>
+export type UserCreate = Omit<UsuarioStore,'id'>
 
-export type UsuarioCreate = Omit<Usuario , 'id'>;
+export type UsuarioCreate = Omit<UserStore , 'id'>;
 
 export interface FormSignUp {
   email: FormControl<string | null>;
@@ -27,7 +28,7 @@ export interface FormSignUp {
 })
 export default class SignUpComponent {
   private _formBuilder = inject(FormBuilder);
-  private _authService = inject(AuthService);
+  private _authService = inject(AuthServiceStore);
   private _router = inject(Router);
   private _authState = inject(AuthStateService);
   private _dataService = inject(DataAccessService);
@@ -68,7 +69,7 @@ export default class SignUpComponent {
 
       // Crear usuario y enviar correo de verificación
       await this._authService.signUp({email, password } );
-      const usuario: UsuarioCreate = { correo: email, admin: false ,carrito:[]};
+      const usuario: UsuarioCreateStore = { correo: email, admin: false ,carrito:[]};
       await this._dataService.create(usuario);
       
       toast.success('Cuenta creada ingrese sus credenciales para iniciar sesion');

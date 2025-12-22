@@ -24,7 +24,12 @@ export default class VentaComponent implements OnInit {
   impuesto = 0;
   total= 0;
   ngOnInit() {
-    this.subtotal = this.producto.reduce((acc, product) => acc + (product.precio ?? 0), 0);
+    this.subtotal = this.producto.reduce(
+      (acc, product) =>
+        acc +
+        (((product as any).precio ?? (product as any).price) as number ?? 0),
+      0
+    );
     this.impuesto = Math.round((this.subtotal / 100) * 13);
     this.envio = this.producto.length * 5;
     this.total = this.subtotal + this.envio + this.impuesto;

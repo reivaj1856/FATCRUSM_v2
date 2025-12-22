@@ -6,6 +6,14 @@ import { UserCreate } from './user.service';
 
 const PATH = 'User'
 
+export interface Venta {
+  id?: string;            // ID del documento
+  nombre_producto: string;
+  cantidad: number;
+  total: number;
+  fecha: string;
+}
+
 export type UsuarioCreate = Omit<Usuario , 'id'>;
 
 @Injectable({
@@ -14,13 +22,11 @@ export type UsuarioCreate = Omit<Usuario , 'id'>;
 export class DataAccessService {  
   private firestore = inject(Firestore);
   private _collection = collection(this.firestore, PATH)
-  
-  constructor() { }
 
   create(user: UsuarioCreate){
     return addDoc(this._collection, user)
   }
-  
+
   async obtenerValorAdminPorCorreo(correo: string): Promise<boolean> {
     const usuariosCollection = collection(this.firestore, 'User') as CollectionReference<Usuario>;
     const q = query(usuariosCollection, where('correo', '==', correo));
@@ -55,4 +61,22 @@ export class DataAccessService {
     await setDoc(docRef, usuario);
   }
 
+  async getVentas(): Promise<Venta[]> {
+    try {
+      const ventasRef = collection(this.firestore, 'ventas');
+      const snapshot = await getDocs(ventasRef);
+
+      const ventas: Venta[] = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...(doc.data() as Venta)
+      }));
+
+      console.log('📦 Ventas obtenidas:', ventas);
+      return ventas;
+    } catch (error) {
+      console.error('❌ Error al obtener ventas:', error);
+      throw error;
+    }
+  }
+  
 }

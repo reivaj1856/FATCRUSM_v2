@@ -30,7 +30,7 @@ export default class ProformaComponent {
   cargando: boolean = false;
 
   ngOnInit() {
-    this.subtotal = this.producto.reduce((acc, product) => acc + (product.precio ?? 0), 0);
+    this.subtotal = this.producto.reduce((acc, product) => acc + (product.tallas[0]?.precio ?? 0), 0);
     this.impuesto = Math.round((this.subtotal / 100) * 13);
     this.envio = this.producto.length * 5;
     this.total = this.subtotal + this.envio + this.impuesto;
@@ -48,7 +48,7 @@ export default class ProformaComponent {
       const productosHtml = this.producto.map(p => `
         <tr>
           <td style="padding:4px 8px;border:1px solid #ccc;">${p.nombre}</td>
-          <td style="padding:4px 8px;border:1px solid #ccc;">${p.precio} Bs</td>
+          <td style="padding:4px 8px;border:1px solid #ccc;">${p.tallas[0]?.precio ?? 0} Bs</td>
         </tr>
       `).join('');
 

@@ -2,11 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
+import { AuthServiceStore } from '../../../../services/auth.service';
 import { getAuth } from '@angular/fire/auth';
 import { onAuthStateChanged } from '@firebase/auth';
-import { Product } from '../../../interface/product';
-import { realService } from '../../../services/reals.service';
+import { Product } from '../../../../interface/product';
+import { realService } from '../../../../services/reals.service';
 import { Router } from '@angular/router';
 import { toast } from 'ngx-sonner';
 
@@ -32,7 +32,7 @@ onAuthStateChanged(auth, (user) => {
 })
 
 export class CreateProductComponent {
-  constructor(public _matDialogoRef:MatDialogRef <CreateProductComponent>, private afAuth: AuthService ){}
+  constructor(public _matDialogoRef:MatDialogRef <CreateProductComponent>, private afAuth: AuthServiceStore ){}
   
   email: string = String(auth.currentUser?.email); 
   private _formBuilder = inject(FormBuilder);

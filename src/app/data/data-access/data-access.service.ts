@@ -6,6 +6,19 @@ import { Pelicula } from '../../interface/Pelicula';
 import { Horario } from '../../interface/horarios';
 import { Dia } from '../../interface/Dia';
 import { Sala } from '../../interface/Sala';
+import { Producto } from '../../component/private/business/inventario/inventario.component';
+
+export interface Pedido {
+  id: number;
+  id_usuario: number;
+  nombre: string;
+  email: string;
+  celular: string;
+  categoria: string;
+  estado: 'Pendiente' | 'Entregado';
+  descripcion?: string;
+  total?: number;
+}
 
 export interface Servicio {
   id?: number;
@@ -40,7 +53,7 @@ export interface Servicio_talla {
 
 @Injectable({ providedIn: 'root' })
 export class NotesService {
-  private _supabaseClient = inject(AuthStateService).supabaseClient;
+  public _supabaseClient = inject(AuthStateService).supabaseClient;
 
   //#region Usuario
   async addUser(nombreN: string, empresaN: string, email1: string) {
@@ -627,5 +640,34 @@ async eliminarServicioTallas(id_servicio_talla: number): Promise<void> {
     return data;
   }
 
+  
   //#endregion
+
+  // ✅ Agregar producto
+  async addProducto(producto: Producto) {
+    const { data, error } = await this._supabaseClient.from('productos').insert([
+      {
+        nombre: producto.nombre,
+        descripcion: producto.descripcion,
+        imagenes: producto.imagenes, // array de strings base64
+      },
+    ]);
+
+    if (error) throw error;
+    return data;
+  }
+
+  async getPedidos(): Promise<Pedido[]> {
+    const { data, error } = await this._supabaseClient
+      .from('pedidos')
+      .select('*');
+      
+    if (error) {
+      console.error(error);
+      return [];
+    }
+
+    return data as Pedido[];
+  }
 }
+  

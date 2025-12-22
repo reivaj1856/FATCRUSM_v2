@@ -8,10 +8,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Usuario } from '../../../interface/User';
 import { Auth } from '@angular/fire/auth';
 import { DataAccessService } from '../../../services/data-access.service';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-carrito',
-  imports: [HeaderComponent,FooterComponent,RouterLink],
+  imports: [HeaderComponent,FooterComponent,RouterLink,NgIf,NgFor],
   templateUrl: './carrito.component.html',
   styles: ``
 })
@@ -24,8 +25,9 @@ export default class CarritoComponent {
 
   async ngOnInit() {
     await this.getcuenta();
-    this.producto = await this.dataProduct.getProducListId(this.usuario?.carrito ?? []);
-    console.log(this.dataProduct.getProducListId(this.usuario?.carrito ?? []));
+    this.producto = await this.dataProduct.getProductsByIds(this.usuario?.carrito ?? [] );
+    console.log(this.producto);
+
   }
 
   async getcuenta(){
@@ -42,7 +44,7 @@ export default class CarritoComponent {
         carrito: arrayRemove(id)
       });
       // Actualiza la lista local de productos
-      this.producto = this.producto.filter(p => p.id !== id);
+      this.producto = this.producto.filter(p => p.id_product+"" !== id);
       // Opcional: mensaje de éxito
       // toast.message('🗑️ Producto eliminado del carrito correctamente.');
     } catch (error) {

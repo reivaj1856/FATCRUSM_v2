@@ -15,17 +15,16 @@ import {  Output, EventEmitter } from '@angular/core';
 })
 export class HeadComponent implements OnInit{
 
+  toggleOpen: HTMLElement | null = null;
+  toggleClose: HTMLElement | null = null;
+  collapseMenu: HTMLElement | null = null;
+
   @Input() titulo: string = 'Bienvenido de nuevo';
 
   private _supabaseClient = inject(AuthService)
   private _authState = inject(AuthService);
   private _router = inject(Router);
   private logueado :boolean = false;
-
-  ngOnInit(): void {
-    this.verLogueado();
-
-  }
 
   async logOut(){
     this.verLogueado();
@@ -39,6 +38,30 @@ export class HeadComponent implements OnInit{
     this.logueado =await this._supabaseClient.getLogin()
   }
   
+  ngOnInit(): void {
+    this.verLogueado();
+    this.toggleOpen = document.getElementById('toggleOpen');
+    this.toggleClose = document.getElementById('toggleClose');
+    this.collapseMenu = document.getElementById('collapseMenu');
+
+    const handleClick = () => {
+      if (this.collapseMenu) {
+        if (this.collapseMenu.style.display === 'block') {
+          this.collapseMenu.style.display = 'none';
+        } else {
+          this.collapseMenu.style.display = 'block';
+        }
+      }
+    };
+
+    if (this.toggleOpen) {
+      this.toggleOpen.addEventListener('click', handleClick);
+    }
+    if (this.toggleClose) {
+      this.toggleClose.addEventListener('click', handleClick);
+    }
+    
+  } 
 
   @Output() toggleMenu = new EventEmitter<void>();
 }

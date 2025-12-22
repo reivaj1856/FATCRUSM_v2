@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, Input, OnInit, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../auth/data-access/auth.service';
 import { toast } from 'ngx-sonner';
@@ -22,6 +22,7 @@ export class Sidebar implements OnInit{
 
   ngOnInit(): void {
     this.verLogueado();
+    this.checkWindowSize(); 
   }
 
   async logOut(){
@@ -37,4 +38,18 @@ export class Sidebar implements OnInit{
     this.logueado =await this._supabaseClient.getLogin()
   }
   @Input() isOpen = false;
+  // Escucha cambios de tamaño de ventana
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkWindowSize();
+  }
+
+  private checkWindowSize() {
+    // Puedes definir “maximizada” como el ancho de pantalla >= 1920px (ejemplo)
+    if (window.innerWidth >= 1280 && window.innerHeight >= 720) {
+      this.isOpen = true;
+    } else {
+      this.isOpen = false;
+    }
+  }
 }

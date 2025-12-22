@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 xl:grid-cols-2 min-h-screen  p-6 gap-6">
+<div id="todo" class="grid grid-cols-1 xl:grid-cols-2 min-h-screen  p-6 gap-6">
 
   <!-- IZQUIERDA: FORMULARIO -->
   <div class="bg-white rounded-2xl shadow-md p-6">
@@ -56,81 +56,102 @@
 
   <!-- DERECHA: BORRADOR -->
   <!-- DERECHA: COTIZACIÓN EN BORRADOR -->
-<div id="cotizacion-preview" class="flex justify-center bg-gray-50  rounded-2xl shadow-md">
-  <div class="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-8 font-sans text-gray-800">
+  <div  class="flex justify-center bg-gray-50  rounded-2xl shadow-md">
+    <div id="cotizacion-preview" class="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-8 font-sans text-gray-800">
 
-    <!-- Encabezado -->
-    <div class="flex items-center justify-between border-b-2 border-orange-400 pb-4 mb-4">
-      <div class="flex items-center space-x-4">
-        <img src="assets/Recurso2.png" alt="Logo empresa" class="w-20 h-20 object-contain" />
-        <div>
-          <h1 class="text-2xl font-bold text-orange-600 leading-tight">{{empresa}}</h1>
-          <p class="text-sm text-gray-600">Cotización de Pedido</p>
+      <!-- Encabezado -->
+      <div class="flex items-center justify-between border-b-2 border-orange-400 pb-4 mb-4">
+        <div class="flex items-center space-x-4">
+          <!-- Logo dinámico -->
+          <div class="flex flex-col items-center space-y-2">
+            <img
+              [src]="logoPreview || 'assets/Recurso1.png'"
+              alt="Logo empresa"
+              class="w-20 h-20 object-contain"
+            />
+
+            <!-- Botón para subir logo -->
+            <label 
+              for="logoInput"
+              class="bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded cursor-pointer"
+              id="CambiarLogoBtn"
+              >
+              Cambiar logo
+            </label>
+            <input
+              id="logoInput"
+              type="file"
+              accept="image/png"
+              class="hidden"
+              (change)="onLogoSelected($event)"
+            />
+          </div>
+
+          <div>
+            <h1 class="text-2xl font-bold text-orange-600 leading-tight">{{empresa}}</h1>
+            <p class="text-sm text-gray-600">Cotización de Pedido</p>
+          </div>
+        </div>
+        <div class="text-right text-sm text-gray-500">
+          <p>Fecha: {{ fechaActual }}</p>
         </div>
       </div>
-      <div class="text-right text-sm text-gray-500">
-        <p>Fecha: {{ fechaActual }}</p>
+
+      <!-- Datos principales -->
+      <div class="mb-6">
+        <p class="text-sm"><strong class="text-gray-700">Cliente:</strong> {{ cliente || '---' }}</p>
+        <p class="text-sm"><strong class="text-gray-700">Descripción:</strong> {{ descripcion || '---' }}</p>
+      </div>
+
+      <!-- Tabla de prendas -->
+      <div *ngIf="prendas.length > 0; else sinPrendas">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="bg-orange-100 text-orange-700 uppercase text-xs">
+              <th class="py-2 px-3 border border-gray-200">Cantidad</th>
+              <th class="py-2 px-3 border border-gray-200">Talla</th>
+              <th class="py-2 px-3 border border-gray-200">Sexo</th>
+              <th class="py-2 px-3 border border-gray-200">Precio</th>
+              <th class="py-2 px-3 border border-gray-200">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of prendas" class="border-b border-gray-200 hover:bg-orange-50 transition">
+              <td class="py-2 px-3 text-center">{{ p.cantidad }}</td>
+              <td class="py-2 px-3 text-center">{{ p.talla }}</td>
+              <td class="py-2 px-3 text-center">{{ p.sexo }}</td>
+              <td class="py-2 px-3 text-center">{{ p.precio | currency:'BOB' }}</td>
+              <td class="py-2 px-3 text-center font-medium text-orange-600">
+                {{ p.cantidad * p.precio | currency:'BOB' }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #sinPrendas>
+        <p class="text-center text-gray-400 italic py-8">No se han agregado prendas aún.</p>
+      </ng-template>
+
+      <!-- Total -->
+      <div class="flex justify-end items-center mt-6 border-t border-orange-200 pt-4">
+        <span class="text-lg font-semibold text-gray-700 mr-2">Total:</span>
+        <span class="text-xl font-bold text-orange-600">{{ calcularTotal() | currency:'BOB' }}</span>
+      </div>
+
+      <!-- Botón imprimir -->
+      <div id="btn-imprimir" class="text-center mt-6">
+        <button (click)="imprimir()"
+          class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition-all">
+          🖨️ Imprimir Cotización
+        </button>
       </div>
     </div>
-
-    <!-- Datos principales -->
-    <div class="mb-6">
-      <p class="text-sm"><strong class="text-gray-700">Cliente:</strong> {{ cliente || '---' }}</p>
-      <p class="text-sm"><strong class="text-gray-700">Descripción:</strong> {{ descripcion || '---' }}</p>
-    </div>
-
-    <!-- Tabla de prendas -->
-    <div *ngIf="prendas.length > 0; else sinPrendas">
-      <table class="w-full border-collapse text-sm">
-        <thead>
-          <tr class="bg-orange-100 text-orange-700 uppercase text-xs">
-            <th class="py-2 px-3 border border-gray-200">Cantidad</th>
-            <th class="py-2 px-3 border border-gray-200">Talla</th>
-            <th class="py-2 px-3 border border-gray-200">Sexo</th>
-            <th class="py-2 px-3 border border-gray-200">Precio</th>
-            <th class="py-2 px-3 border border-gray-200">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let p of prendas" class="border-b border-gray-200 hover:bg-orange-50 transition">
-            <td class="py-2 px-3 text-center">{{ p.cantidad }}</td>
-            <td class="py-2 px-3 text-center">{{ p.talla }}</td>
-            <td class="py-2 px-3 text-center">{{ p.sexo }}</td>
-            <td class="py-2 px-3 text-center">{{ p.precio | currency:'BOB' }}</td>
-            <td class="py-2 px-3 text-center font-medium text-orange-600">
-              {{ p.cantidad * p.precio | currency:'BOB' }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <ng-template #sinPrendas>
-      <p class="text-center text-gray-400 italic py-8">No se han agregado prendas aún.</p>
-    </ng-template>
-
-    <!-- Total -->
-    <div class="flex justify-end items-center mt-6 border-t border-orange-200 pt-4">
-      <span class="text-lg font-semibold text-gray-700 mr-2">Total:</span>
-      <span class="text-xl font-bold text-orange-600">{{ calcularTotal() | currency:'BOB' }}</span>
-    </div>
-
-    <!-- Botón imprimir -->
-    <div class="text-center mt-6">
-      <button
-        (click)="imprimir()"
-        class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition-all"
-      >
-        🖨️ Imprimir Cotización
-      </button>
-    </div>
   </div>
-</div>
 
 
   <!-- MODAL DE AÑADIR PRENDA -->
-  <div *ngIf="mostrarModal"
-    class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+  <div *ngIf="mostrarModal" class="fixed inset-0 bg-opacity-40 flex items-center justify-center z-50">
     <div class="bg-white p-6 rounded-xl shadow-lg w-80">
       <h3 class="text-lg font-bold mb-3 text-orange-600">Añadir prenda</h3>
 
@@ -142,8 +163,7 @@
 
       <div class="mb-2">
         <label class="block text-sm font-medium">Talla</label>
-        <input type="text" [(ngModel)]="nuevaPrenda.talla"
-          class="w-full border border-gray-300 rounded-lg px-3 py-1" />
+        <input type="text" [(ngModel)]="nuevaPrenda.talla" class="w-full border border-gray-300 rounded-lg px-3 py-1" />
       </div>
 
       <div class="mb-2">

@@ -4,7 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/ro
 import { HomelistComponent } from '../homelist/homelist.component';
 import { Product } from '../../../interface/product';
 import { realService } from '../../../services/reals.service';
-import { AuthService } from '../../../services/auth.service';
+import { AuthServiceStore } from '../../../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { SidebarStoreComponent } from '../sidebar-store/sidebar-store.component';
 import { HeadComponent } from '../../head/head.component';
@@ -19,7 +19,7 @@ import { filter, map } from 'rxjs';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  _auth = inject(AuthService);
+  _auth = inject(AuthServiceStore);
   auth = inject(Auth);
   logueado: boolean=true;
 
@@ -27,7 +27,7 @@ export class HomeComponent {
     this.getLogin();
     setInterval(() => {
       this.getLogin();
-    }, 2000); // cada 2 segundos
+    }, 10000); // cada 10 segundos
 
     this.router.events
       .pipe(
@@ -49,7 +49,6 @@ export class HomeComponent {
     }else{
       this.logueado= true;
     } 
-    console.log(this.logueado) ;
   }    
   logout(){
     this._auth.cerrarSesion();
@@ -62,25 +61,28 @@ export class HomeComponent {
   private category = signal<'all' | 'hombre' | 'mujer' | 'ninos' | 'ofertas'>('all');
 
   filteredProducts = computed(() => {
+    
     const cat = this.category();
     const products = this.allProducts();
-
+    console.log(products);
     if (cat === 'all') return products;
-    return products.filter(p => p[cat]);
+    // Cast to any to safely index with the dynamic category key (Product may not declare these properties)
+    return products.filter(p => !!(p as any)[cat]);
+    
   });
-
+  
  constructor(private productService: realService,public router: Router,private activatedRoute: ActivatedRoute) {
     this.allProducts = this.productService.getProduct;
   }
   // Función para cambiar el filtro
   filterByCategory(category: 'all' | 'hombre' | 'mujer' | 'ninos' | 'ofertas') {
-  console.log('Filtro aplicado:', category);
+
   this.category.set(category);
 }
 
 
   showAll() {
-    console.log('Mostrar todos');
+
     this.category.set('all');
   }
 

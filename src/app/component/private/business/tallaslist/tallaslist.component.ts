@@ -14,7 +14,7 @@ export interface User {
 }
 
 interface Talla {
-  id_talla?: number;
+  id?: number;
   id_usuario?: number;
   talla?: string;
   sexo?: string;
@@ -70,9 +70,9 @@ export default class TallaslistComponent implements OnInit {
   }
 
   async saveTalla(talla: string, sexo: string, tipo: string) {
-    if (this.tallaSelect?.id_talla) {
+    if (this.tallaSelect?.id) {
       this.noteservice.editarTalla(
-        this.tallaSelect.id_talla ?? -1,
+        this.tallaSelect.id ?? -1,
         talla,
         sexo,
         tipo
@@ -88,8 +88,11 @@ export default class TallaslistComponent implements OnInit {
   }
 
   confirmDelete(talla: Talla) {
-    this.noteservice.eliminarTalla(talla.id_talla ?? -1);
+    this.noteservice.eliminarTalla(talla.id ?? -1);
     this.loadTallas(this.id_usuario);
+    console.log(talla.id);
   }
 
+
+  
 }

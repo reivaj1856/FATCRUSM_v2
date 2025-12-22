@@ -4,7 +4,7 @@ import { DataAccessService } from '../../services/data-access.service';
 import { Auth, authState } from '@angular/fire/auth';
 import { Product } from '../../interface/product';
 import { Usuario } from '../../interface/User';
-import { AuthService } from '../../services/auth.service';
+import { AuthServiceStore } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +20,7 @@ export class HeaderComponent {
   admin: boolean=false;
   logueado: boolean=false;
   cantidadCarrito = 0;
-  _auth = inject(AuthService);
+  _auth = inject(AuthServiceStore);
 
   ngOnInit(): void {
     this.toggleOpen = document.getElementById('toggleOpen');

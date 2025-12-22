@@ -15,7 +15,7 @@ const PATH = 'user'
   providedIn: 'root'
 })
 
-export class AuthService {
+export class AuthServiceStore {
   private _auth = inject(Auth) 
   private _firestore = inject(Firestore);
   private _collection = collection(this._firestore,PATH)

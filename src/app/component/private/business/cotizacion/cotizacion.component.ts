@@ -22,6 +22,8 @@ export interface Prenda {
 export default class CotizacionComponent {
   empresa = 'Mi Empresa S.A.';
   cliente: string = '';
+  logoPreview: string | null = null;
+
 
   private _authService = inject(AuthService);
   public fechaActual: string = new Date().toLocaleDateString();
@@ -65,5 +67,23 @@ export default class CotizacionComponent {
 
   imprimir() {
     window.print();
+  }
+
+  onLogoSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+
+      if (!file.type.includes('image/png')) {
+        alert('Por favor, selecciona un archivo .png');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.logoPreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }

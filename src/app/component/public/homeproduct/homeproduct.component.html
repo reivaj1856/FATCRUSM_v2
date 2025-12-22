@@ -3,23 +3,26 @@
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <div class="col-span-2 grid grid-cols-2 lg:sticky top-0 gap-0.5">
           <div class="columns-2 gap-0.5 space-y-0.5">
-            <div class="overflow-hidden">
-              <img src={{product.enlace}} alt="Product" class="w-full aspect-[253/337] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
+            <div class="overflow-hidden" *ngIf="product.imagenes[1]">
+              <img [src]="product.imagenes[1]" alt="Product 1" class="w-full aspect-[253/337] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
             </div>
-            <div class="overflow-hidden">
-              <img src={{product.enlace1}} alt="Product" class="w-full aspect-[253/337] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
+            <div class="overflow-hidden" *ngIf="product.imagenes[2]">
+              <img [src]="product.imagenes[2]" alt="Product 2" class="w-full aspect-[253/337] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
             </div>
-            <div class="overflow-hidden">
-              <img src={{product.enlace2}} alt="Product" class="w-full aspect-[253/337] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
+            <div class="overflow-hidden" *ngIf="product.imagenes[3]">
+              <img [src]="product.imagenes[3]" alt="Product 3" class="w-full aspect-[253/337] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
             </div>
-            <div class="overflow-hidden">
-              <img src={{product.enlace3}} alt="Product" class="w-full aspect-[253/337] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
+            <div class="overflow-hidden" *ngIf="product.imagenes[4]">
+              <img [src]="product.imagenes[4]" alt="Product 4" class="w-full aspect-[253/337] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
             </div>
           </div>
-          <div class="overflow-hidden">
-            <img src={{product.enlace4}} alt="Product" class="w-full aspect-[3/4] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
-          </div>
+
+        <!-- Imagen principal más grande -->
+        <div class="overflow-hidden mt-2" *ngIf="product.imagenes[0]">
+          <img [src]="product.imagenes[0]" alt="Product 5" class="w-full aspect-[3/4] object-cover object-top shadow-md hover:scale-[1.05] transition-all duration-300" />
         </div>
+        </div>
+
 
         <div class="py-6 px-8 max-lg:max-w-2xl">
           <div>
@@ -66,7 +69,7 @@
 
           <div class="mt-8">
             <div class="flex items-center flex-wrap gap-4">
-              <p class="text-slate-900 text-4xl font-semibold">{{product.precio}} Bs</p>
+              <p class="text-slate-900 text-4xl font-semibold">{{product.tallas[0]?.precio}} Bs</p>
               <p class="text-slate-400 text-sm mt-2"><span class="ml-1">Envio incluido</span></p>
             </div>
           </div>
@@ -74,14 +77,20 @@
           <div class="mt-8">
             <h3 class="text-xl font-semibold text-slate-900">Tallas disponibles</h3>
             <div class="flex flex-wrap gap-4 mt-4 font-semibold text-2xl">
-              {{product.talla}}
+              <ng-container *ngIf="product.tallas && product.tallas.length; else noTallas">
+                <ng-container *ngFor="let t of product.tallas; let i = index">
+                  <span>{{ t.nombre }}<span *ngIf="i < product.tallas.length - 1">, </span></span>
+                </ng-container>
+              </ng-container>
+              <ng-template #noTallas>N/A</ng-template>
             </div>
           </div>
 
           <div class="mt-8 space-y-4">
-            <button type="button" (click)="agregarCarrito(product.id)" class="w-full px-4 py-2.5 cursor-pointer border border-slate-800 bg-transparent hover:bg-slate-50 text-slate-900 text-sm font-medium rounded-md">Agregar al carrito</button>
+            <button type="button" (click)="agregarCarrito(product.id_producto)" class="w-full px-4 py-2.5 cursor-pointer border border-slate-800 bg-transparent hover:bg-slate-50 text-slate-900 text-sm font-medium rounded-md">Agregar al carrito</button>
             <button type="button"
           [routerLink]="['/private/comprobante']"
+          (click)="crearVenta()"
           [state]="{ producto: [product] }"
           class="w-full px-4 py-2.5 cursor-pointer border border-slate-800 bg-neutral-800 hover:bg-neutral-900 text-white text-sm font-medium rounded-md">
     Comprar ahora
