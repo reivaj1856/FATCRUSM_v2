@@ -39,7 +39,7 @@
                 </div>
                 <div class="md:ml-auto">
                     <h6 class="text-[15px] font-medium text-slate-500">Precio</h6>
-                    <p class="text-[15px] text-slate-900 font-medium mt-2">{{ (producto.tallas && producto.tallas.length) ? producto.tallas[0].precio : 0 }}</p>
+                    <p class="text-[15px] text-slate-900 font-medium mt-2">{{ (producto.tallas && producto.tallas.length) ? producto.tallas[0].precio : 0 }}a</p>
                     <button title="Delete" class="cursor-pointer" (click)="producto.id_product ? eliminarProductoOfList(producto.id_product.toString()) : null">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
                     <path
